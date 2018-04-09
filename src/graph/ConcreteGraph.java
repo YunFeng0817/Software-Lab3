@@ -1,4 +1,4 @@
 package graph;
 
-public class ConcreteGraph {
+public class ConcreteGraph<L>  {
 }
