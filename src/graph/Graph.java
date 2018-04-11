@@ -20,7 +20,7 @@ import java.util.Set;
 public interface Graph<L, E> {
 
     /**
-     * Create an empty graph.
+     * Create an empty graph. b
      *
      * @param <L>
      * @param <E>
