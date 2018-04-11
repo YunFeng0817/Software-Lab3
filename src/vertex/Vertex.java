@@ -1,10 +1,10 @@
 package vertex;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Vertex {
     private String label;
-    protected List<?> info;
 
     Vertex(String label) {
         this.label = label;
