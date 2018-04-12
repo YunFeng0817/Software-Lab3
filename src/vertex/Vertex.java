@@ -1,9 +1,6 @@
 package vertex;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import edge.*;
 
@@ -33,6 +30,27 @@ public abstract class Vertex {
             return true;
         }
         return false;
+    }
+
+    public boolean removeEdge(Edge edge) {
+        boolean removeInEdge = false, removeOutEdge = false;
+        Iterator<Edge> iterator = inEdges.iterator();
+        while (iterator.hasNext()) {
+            Edge item = iterator.next();
+            if (item.equals(edge)) {
+                iterator.remove();
+                removeInEdge = true;
+            }
+        }
+        iterator = outEdges.iterator();
+        while (iterator.hasNext()) {
+            Edge item = iterator.next();
+            if (item.equals(edge)) {
+                iterator.remove();
+                removeOutEdge = true;
+            }
+        }
+        return removeInEdge || removeOutEdge;
     }
 
     public Set<Edge> getInEdges() {

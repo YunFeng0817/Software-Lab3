@@ -10,11 +10,15 @@ import java.util.Set;
 abstract public class Edge {
     protected final List<Vertex> vertices = new LinkedList<>();
     private final String label;
-    double weight;
+    private double weight;
 
     Edge(String label, double weight) {
         this.label = label;
         this.weight = weight;
+    }
+
+    public double getWeight() {
+        return weight;
     }
 
     abstract public boolean addVertices(List<Vertex> vertices);
