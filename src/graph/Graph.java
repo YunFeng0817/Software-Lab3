@@ -38,23 +38,7 @@ public interface Graph<L, E> {
      * @return true if this graph did not already include a vertex with the
      * given label; otherwise false (and this graph is not modified)
      */
-    public boolean add(L vertex);
-
-    /**
-     * Add, change, or remove a weighted directed edge in this graph.
-     * If weight is nonzero, add an edge or update the weight of that edge;
-     * vertices with the given labels are added to the graph if they do not
-     * already exist.
-     * If weight is zero, remove the edge if it exists (the graph is not
-     * otherwise modified).
-     *
-     * @param source label of the source vertex
-     * @param target label of the target vertex
-     * @param weight non-negative weight of the edge
-     * @return the previous weight of the edge, or zero if there was no such
-     * edge
-     */
-    public int set(L source, L target, int weight);
+    public boolean addVertex(L vertex);
 
     /**
      * Remove a vertex from this graph; any edges to or from the vertex are

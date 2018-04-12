@@ -1,0 +1,38 @@
+package edge;
+
+import vertex.Vertex;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class HyperEdge extends Edge {
+
+    HyperEdge(String label, double weight) {
+        super(label, weight);
+    }
+
+    @Override
+    public boolean addVertices(List<Vertex> vertices) {
+        if (vertices.size() > 0) {
+            if (super.vertices.size() == 0) {
+                super.vertices.addAll(vertices.stream().filter(item -> !super.vertices.contains(item)).collect(Collectors.toList()));
+                return true;
+            }
+            return false;
+        } else {
+            throw new RuntimeException("the hyper edge must have one more vertex");
+        }
+    }
+
+    @Override
+    Set<Vertex> sourceVertices() {
+        return super.vertices();
+    }
+
+    @Override
+    Set<Vertex> targetVertices() {
+        return super.vertices();
+    }
+}

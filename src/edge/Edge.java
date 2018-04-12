@@ -23,11 +23,11 @@ abstract public class Edge {
         return vertices.contains(v);
     }
 
-    Set<Vertex> vertices() {
+    public Set<Vertex> vertices() {
         return new HashSet<>(vertices);
     }
 
-    abstract Set<Vertex> sourceVertices();
+    abstract public Set<Vertex> sourceVertices();
 
-    abstract Set<Vertex> targetVertices();
+    abstract public Set<Vertex> targetVertices();
 }
