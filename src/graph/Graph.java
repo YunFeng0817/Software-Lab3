@@ -3,33 +3,23 @@
  */
 package graph;
 
+import edge.Edge;
+import vertex.Vertex;
+
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 /**
  * A mutable weighted graph with labeled vertices.
- * Vertices have distinct labels of an immutable type {@code L} when compared
+ * Vertices have distinct labels of an immutable type {@code Vertex} when compared
  * using the {@link Object#equals(Object) equals} method.
- * Edges have multiple types and have a non-negative weight of type {@code double}.
+ * Edgedges have multiple types and have a non-negative weight of type {@code double}.
  * <p>
  * <p>PS2 instructions: this is a required ADT interface.
  * You MUST NOT change the specifications or add additional methods.
- *
- * @param <L> type of vertex labels in this graph, must be immutable
  */
-public interface Graph<L, E> {
-
-    /**
-     * Create an empty graph. b
-     *
-     * @param <L>
-     * @param <E>
-     * @return a new empty weighted abstract graph
-     */
-    static <L, E> Graph<L, E> empty() {
-//        return new ConcreteGraph<L>();
-        throw new RuntimeException("not implement");
-    }
+public interface Graph {
 
     /**
      * Add a vertex to this graph.
@@ -38,7 +28,7 @@ public interface Graph<L, E> {
      * @return true if this graph did not already include a vertex with the
      * given label; otherwise false (and this graph is not modified)
      */
-    public boolean addVertex(L vertex);
+    public boolean addVertex(Vertex vertex);
 
     /**
      * Remove a vertex from this graph; any edges to or from the vertex are
@@ -48,14 +38,14 @@ public interface Graph<L, E> {
      * @return true if this graph included a vertex with the given label;
      * otherwise false (and this graph is not modified)
      */
-    public boolean removeVertex(L vertex);
+    public boolean removeVertex(Vertex vertex);
 
     /**
      * Get all the vertices in this graph.
      *
      * @return the set of labels of vertices in this graph
      */
-    public Set<L> vertices();
+    public Set<Vertex> vertices();
 
     /**
      * Get the source vertices with directed edges to a target vertex and the
@@ -67,7 +57,7 @@ public interface Graph<L, E> {
      * the value for each key is the (nonzero) weight of the edge from
      * the key to target
      */
-    public Map<L, Double> sources(L target);
+    public Map<Vertex, List<Double>> sources(Vertex target);
 
     /**
      * Get the target vertices with directed edges from a source vertex and the
@@ -79,12 +69,12 @@ public interface Graph<L, E> {
      * the value for each key is the (nonzero) weight of the edge from
      * source to the key
      */
-    public Map<L, Double> targets(L source);
+    public Map<Vertex, List<Double>> targets(Vertex source);
 
-    public boolean addEdge(E edge);
+    public boolean addEdge(Edge edge);
 
-    public boolean removeEdge(E edge);
+    public boolean removeEdge(Edge edge);
 
-    public Set<E> edges();
+    public Set<Edge> edges();
 
 }
