@@ -10,10 +10,10 @@ abstract public class GraphFactory {
         String content;
         System.out.println();
         while ((content = fileReader.readLine()).replace(" ", "").equals("")) ;
-        Pattern typePattern = Pattern.compile("\".*\"");
+        Pattern typePattern = Pattern.compile("GraphType\\s*=\\s*\"(.*)\"");
         Matcher typeMatcher = typePattern.matcher(content);
         if (typeMatcher.find()) {
-            String type = typeMatcher.group().substring(1, typeMatcher.group().length() - 1);
+            String type = typeMatcher.group(1);
             switch (type) {
                 case "GraphPoet":
                     return GraphPoetFactory.createGraph(filePath);
