@@ -6,8 +6,17 @@ import vertex.Vertex;
 import java.util.*;
 
 public class ConcreteGraph implements Graph {
+    private final String label;
     private final List<Vertex> vertices = new LinkedList<>();
     private final List<Edge> edges = new LinkedList<>();
+
+    public ConcreteGraph(String label) {
+        this.label = label;
+    }
+
+    public String getLabel() {
+        return this.label;
+    }
 
     @Override
     public boolean addVertex(Vertex vertex) {
@@ -101,5 +110,8 @@ public class ConcreteGraph implements Graph {
         return new HashSet<>(edges);
     }
 
-
+    @Override
+    public boolean equals(Object obj) {
+        return obj != null && obj instanceof ConcreteGraph && ((ConcreteGraph) obj).getLabel().equals(this.getLabel());
+    }
 }

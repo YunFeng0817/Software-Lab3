@@ -8,7 +8,7 @@ public class Word extends Vertex {
 
     @Override
     void fillVertexInfo(String[] args) {
-        throw new RuntimeException("not supported");
+        throw new UnsupportedOperationException();
     }
 
     @Override
