@@ -65,13 +65,41 @@ abstract public class GraphFactory {
         // 跳过图的类型，图的label的内容
         while (!fileReader.readLine().equals("")) ;
         fileReader.readLine();
+        // 找到文件中关于点的描述
         while (!(content = fileReader.readLine()).equals("")) {
-            regex = Pattern.compile("^Vertex\\s*=\\s*<\"(.*)\",\\s*\"(.*)\",\\s*<(.*)>>$");
+            regex = Pattern.compile("^Vertex\\s*=\\s*<\"(.*)\",\\s*\"(.*)\"(,\\s*<(.*)>)?>$");
             matcher = regex.matcher(content);
             if (matcher.find()) {
                 String label = matcher.group(1);
                 String type = matcher.group(2);
                 String attr = matcher.group(3);
+                vertices.add(new ArrayList<>(Arrays.asList(label, type, attr)));
+            }
+        }
+        return vertices;
+    }
+
+    static List<List<String>> getEdges(String filePath) throws IOException {
+        List<List<String>> vertices = new ArrayList<>();
+        BufferedReader fileReader = new BufferedReader(new FileReader(filePath));
+        Pattern regex;
+        Matcher matcher;
+        String content;
+        // 跳过图的类型，图的label的内容
+        while (!fileReader.readLine().equals("")) ;
+        // 跳过点的描述信息
+        while (!fileReader.readLine().equals("")) ;
+        fileReader.readLine();
+        // 找到文件中关于点的描述
+        while ((content = fileReader.readLine()) != null && !content.equals("")) {
+            regex = Pattern.compile("^Edge\\s*=\\s*<\"(.*)\",\\s*\"(.*)\",\\s*\"(.*)\",\\s*\"(.*)\",\\s*\"(.*)\",\\s*\"(.*)\">$");
+            matcher = regex.matcher(content);
+            if (matcher.find()) {
+                String label = matcher.group(1);
+                String type = matcher.group(2);
+                String attr = matcher.group(3);
+//                System.out.println(matcher.groupCount());
+                System.out.println(label + " " + type + " " + attr);
                 vertices.add(new ArrayList<>(Arrays.asList(label, type, attr)));
             }
         }
