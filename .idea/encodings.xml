@@ -3,5 +3,6 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$/src/test/graph/GraphFactoryTest.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/test/graph/GraphFactoryTest.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/test/graph/GraphSocialTest.java" charset="GBK" />
   </component>
 </project>

@@ -1,5 +1,7 @@
 package graph;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -27,7 +29,10 @@ public class GraphFactoryTest {
     @Test
     public void testCreateGraph() throws Exception {
         // GraphPoet.txt is a data file which contain graph information
-        GraphFactory.createGraph("./test/graph/GraphPoet.txt");
+        assertEquals(GraphPoetFactory.createGraph("./test/graph/data/GraphPoet.txt"), GraphFactory.createGraph("./test/graph/data/GraphPoet.txt"));
+        assertEquals(GraphSocialFactory.createGraph("./test/graph/data/GraphSocial.txt"), GraphFactory.createGraph("./test/graph/data/GraphSocial.txt"));
+        assertEquals(GraphTopologyFactory.createGraph("./test/graph/data/GraphTopology.txt"), GraphFactory.createGraph("./test/graph/data/GraphTopology.txt"));
+        assertEquals(GraphMovieFactory.createGraph("./test/graph/data/GraphMovie.txt"), GraphFactory.createGraph("./test/graph/data/GraphMovie.txt"));
     }
 
 
