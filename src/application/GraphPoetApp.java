@@ -5,7 +5,7 @@ import vertex.Vertex;
 import vertex.WordVertexFactory;
 
 public class GraphPoetApp {
-    private final Graph graphPoet = new ConcreteGraph();
+    private final Graph graphPoet = new ConcreteGraph("test");
 
     public static void Main(String[] args) {
         Vertex point1 = new WordVertexFactory().createVertex("to", null);

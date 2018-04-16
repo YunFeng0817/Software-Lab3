@@ -27,12 +27,12 @@ public class HyperEdge extends Edge {
     }
 
     @Override
-    Set<Vertex> sourceVertices() {
+    public Set<Vertex> sourceVertices() {
         return super.vertices();
     }
 
     @Override
-    Set<Vertex> targetVertices() {
+    public Set<Vertex> targetVertices() {
         return super.vertices();
     }
 }

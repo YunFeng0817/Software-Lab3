@@ -10,7 +10,7 @@ import java.util.Set;
 abstract public class Edge {
     protected final List<Vertex> vertices = new LinkedList<>();
     private final String label;
-    private double weight = 0;
+    private double weight = -1;
 
     Edge(String label, double weight) {
         this.label = label;
