@@ -23,6 +23,7 @@ public class ConcreteGraph implements Graph {
         if (vertices.remove(vertex)) {
             vertex.getInEdges().forEach(item -> item.sourceVertices().forEach(o -> o.removeEdge(item)));
             vertex.getOutEdges().forEach(item -> item.targetVertices().forEach(o -> o.removeEdge(item)));
+            edges.removeIf(item -> item.vertices().contains(vertex));
             return true;
         }
         return false;
