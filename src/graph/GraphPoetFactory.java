@@ -1,21 +1,17 @@
 package graph;
 
+import edge.EdgeFactory;
 import vertex.Vertex;
 import vertex.VertexFactory;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.*;
+import java.util.stream.Collectors;
 
 public class GraphPoetFactory {
     public static Graph createGraph(String filePath) throws IOException {
-        Graph poet = null;
-        Pattern regex;
-        Matcher matcher;
-        String content;
+        Graph poet;
         // graph name
         String graphName = GraphFactory.GraphLabel(filePath);
         poet = new ConcreteGraph(graphName);
@@ -23,10 +19,17 @@ public class GraphPoetFactory {
         List<List<String>> vertexCut = GraphFactory.getVertices(filePath);
         List<Vertex> vertices = new ArrayList<>();
         for (List<String> list : vertexCut) {
-            vertices.add(VertexFactory.createVertex(list.get(0), list.get(1), null));
+            Vertex newVertex = VertexFactory.createVertex(list.get(0), list.get(1), null);
+            vertices.add(newVertex);
+            poet.addVertex(newVertex);
         }
-
         List<List<String>> edgeCut = GraphFactory.getEdges(filePath);
+        for (List<String> list : edgeCut) {
+            List<Vertex> vertexInEdge = new ArrayList<>();
+            vertexInEdge.addAll(vertices.stream().filter(item -> item.getLabel().equals(list.get(3))).collect(Collectors.toList()));
+            vertexInEdge.addAll(vertices.stream().filter(item -> item.getLabel().equals(list.get(4))).collect(Collectors.toList()));
+            poet.addEdge(EdgeFactory.createEdge(list.get(0), list.get(1), vertexInEdge, Double.parseDouble(list.get(2))));
+        }
         return poet;
     }
 }

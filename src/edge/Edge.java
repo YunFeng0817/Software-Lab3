@@ -17,6 +17,10 @@ abstract public class Edge {
         this.weight = weight;
     }
 
+    public String getLabel() {
+        return label;
+    }
+
     public double getWeight() {
         return weight;
     }
@@ -39,5 +43,15 @@ abstract public class Edge {
         double oldWeight = this.weight;
         this.weight = weight;
         return oldWeight;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj != null && obj instanceof Edge && ((Edge) obj).getLabel().equals(this.getLabel());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.label.hashCode();
     }
 }

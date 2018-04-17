@@ -38,7 +38,7 @@ public class GraphFactoryTest {
     @Test
     public void testGetVertices() throws Exception {
         // GraphPoet.txt is a data file which contain graph information
-//        GraphFactory.getVertices("./test/graph/data/GraphPoet.txt");
+        GraphFactory.getVertices("./test/graph/data/GraphPoet.txt");
 //        GraphFactory.getVertices("./test/graph/data/GraphSocial.txt");
         GraphFactory.getVertices("./test/graph/data/GraphTopology.txt");
         GraphFactory.getVertices("./test/graph/data/GraphMovie.txt");
@@ -47,7 +47,7 @@ public class GraphFactoryTest {
     @Test
     public void testGetEdges() throws Exception {
         // GraphPoet.txt is a data file which contain graph information
-//        GraphFactory.getVertices("./test/graph/data/GraphPoet.txt");
+        GraphFactory.getEdges("./test/graph/data/GraphPoet.txt");
 //        GraphFactory.getVertices("./test/graph/data/GraphSocial.txt");
         GraphFactory.getEdges("./test/graph/data/GraphTopology.txt");
         GraphFactory.getEdges("./test/graph/data/GraphMovie.txt");
