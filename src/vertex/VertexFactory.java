@@ -1,5 +1,12 @@
 package vertex;
 
 abstract public class VertexFactory {
-    abstract public Vertex createVertex(String label, String[] args);
+    public static Vertex createVertex(String label, String type, String[] args) {
+        switch (type) {
+            case "Word":
+                return WordVertexFactory.createVertex(label, args);
+            default:
+                return null;
+        }
+    }
 }
