@@ -95,12 +95,15 @@ abstract public class GraphFactory {
             regex = Pattern.compile("^Edge\\s*=\\s*<\"(.*)\",\\s*\"(.*)\",\\s*\"(.*)\",\\s*\"(.*)\",\\s*\"(.*)\",\\s*\"(.*)\">$");
             matcher = regex.matcher(content);
             if (matcher.find()) {
-                String label = matcher.group(1);
-                String type = matcher.group(2);
-                String attr = matcher.group(3);
-//                System.out.println(matcher.groupCount());
-                System.out.println(label + " " + type + " " + attr);
-                vertices.add(new ArrayList<>(Arrays.asList(label, type, attr)));
+                vertices.add(new ArrayList<>(Arrays.asList(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4), matcher.group(5), matcher.group(6))));
+            }
+            regex = Pattern.compile("^HyperEdge\\s*=\\s*<\"(.*)\",\\s*\"(.*)\"(?:,\\s*\\{(.*)})*?>$");
+            matcher = regex.matcher(content);
+            if (matcher.find()) {
+                System.out.println(matcher.group(1));
+                System.out.println(matcher.group(2));
+                System.out.println(matcher.group(3));
+                vertices.add(new ArrayList<>(Arrays.asList(matcher.group(1), matcher.group(2), matcher.group(3))));
             }
         }
         return vertices;

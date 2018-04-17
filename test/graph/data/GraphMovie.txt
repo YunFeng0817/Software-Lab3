@@ -15,4 +15,4 @@ Edge = <"GMFD", "MovieDirectorRelation", "-1", "TheGreenMile", "FrankDarabont", 
 Edge= <"SRMF", "MovieActorRelation", "1", "TheShawshankRedemption", "TimRobbins", "No">
 Edge = <"SRTR", "MovieActorRelation", "2", "TheShawshankRedemption", "MorganFreeman", "No">
 Edge = <"GMTH", "MovieActorRelation", "1", "TheGreenMile", "TomHanks", "No">
-HyperEdge = <"ActorsInSR","SameMovieHyperEdge"，{"TimRobbins", "MorganFreeman"}>
+HyperEdge = <"ActorsInSR","SameMovieHyperEdge",{"TimRobbins", "MorganFreeman"}>
