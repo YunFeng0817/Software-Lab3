@@ -1,4 +1,7 @@
 package graph;
 
-public class NetworkTopology {
+public class NetworkTopology extends ConcreteGraph {
+    public NetworkTopology(String label) {
+        super(label);
+    }
 }

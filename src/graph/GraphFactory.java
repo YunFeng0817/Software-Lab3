@@ -67,12 +67,13 @@ abstract public class GraphFactory {
         fileReader.readLine();
         // 找到文件中关于点的描述
         while (!(content = fileReader.readLine()).equals("")) {
-            regex = Pattern.compile("^Vertex\\s*=\\s*<\"(.*)\",\\s*\"(.*)\"(,\\s*<(.*)>)?>$");
+            regex = Pattern.compile("^Vertex\\s*=\\s*<\"(.*)\",\\s*\"(.*)\"(?:,\\s*<(.*)>)?>$");
             matcher = regex.matcher(content);
             if (matcher.find()) {
                 String label = matcher.group(1);
                 String type = matcher.group(2);
                 String attr = matcher.group(3);
+                System.out.println(attr);
                 vertices.add(new ArrayList<>(Arrays.asList(label, type, attr)));
             }
         }
