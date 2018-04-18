@@ -30,8 +30,8 @@ public class GraphPoetAppTest {
     }
 
     @Test
-    public void testGetBrigde() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method getBridge = poetApp.getClass().getDeclaredMethod("getBridge", new Class[]{String.class, String.class});
+    public void testGetBridge() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method getBridge = poetApp.getClass().getDeclaredMethod("getBridge", String.class, String.class);
         getBridge.setAccessible(true);
         assertEquals("strange", getBridge.invoke(poetApp, "explore", "new"));
         assertEquals("life", getBridge.invoke(poetApp, "new", "and"));

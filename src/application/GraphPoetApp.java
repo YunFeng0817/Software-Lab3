@@ -6,11 +6,10 @@ import vertex.Vertex;
 import java.io.IOException;
 import java.util.*;
 
-public class GraphPoetApp {
+class GraphPoetApp {
     private Graph graphPoet;
 
     GraphPoetApp(String filePath) throws IOException {
-
         graphPoet = GraphFactory.createGraph(filePath);
     }
 
