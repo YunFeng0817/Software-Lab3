@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.util.*;
 
 public class GraphPoetApp {
-    private static Graph graphPoet;
+    private Graph graphPoet;
 
-    public static void main(String[] args) throws IOException {
-        graphPoet = GraphFactory.createGraph("./test/graph/data/GraphPoet.txt");
-        System.out.println(poem("Seek to explore new and exciting synergies!"));
+    GraphPoetApp(String filePath) throws IOException {
+
+        graphPoet = GraphFactory.createGraph(filePath);
     }
 
     /**
@@ -20,7 +20,7 @@ public class GraphPoetApp {
      * @param input string from which to create the poem
      * @return poem (as described above)
      */
-    private static String poem(String input) {
+    String poem(String input) {
         List<String> inputWords;
         String[] test = input.split(" ");
         inputWords = new LinkedList<>(Arrays.asList(test));
@@ -55,7 +55,7 @@ public class GraphPoetApp {
      * @param target : the target vertex of the edge
      * @return if the bridge is existed,return the bridge word, "" is returned otherwise
      */
-    private static String getBridge(String source, String target) {
+    private String getBridge(String source, String target) {
         source = source.toLowerCase();
         target = target.toLowerCase();
         String finalSource = source;

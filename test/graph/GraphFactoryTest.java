@@ -11,7 +11,7 @@ import org.junit.After;
  *
  * @author <Authors name>
  * @version 1.0
- * @since <pre>ËÄÔÂ 16, 2018</pre>
+ * @since <pre>April 16, 2018</pre>
  */
 public class GraphFactoryTest {
 
