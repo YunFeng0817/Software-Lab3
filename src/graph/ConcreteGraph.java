@@ -4,6 +4,7 @@ import edge.Edge;
 import vertex.Vertex;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ConcreteGraph implements Graph {
     private final String label;
@@ -65,10 +66,10 @@ public class ConcreteGraph implements Graph {
     @Override
     public Map<Vertex, List<Double>> targets(Vertex source) {
         if (vertices.contains(source)) {
-            Set<Edge> outEdges = source.getInEdges();
+            Set<Edge> outEdges = source.getOutEdges();
             Map<Vertex, List<Double>> result = new HashMap<>();
             for (Edge item : outEdges) {
-                Vertex target = item.sourceVertices().stream().filter(o -> !o.equals(source)).findFirst().orElse(null);
+                Vertex target = item.targetVertices().stream().filter(o -> !o.equals(source)).findFirst().orElse(null);
                 if (result.keySet().contains(target)) {
                     result.get(target).add(item.getWeight());
                 } else {

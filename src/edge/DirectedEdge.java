@@ -34,7 +34,7 @@ public class DirectedEdge extends Edge {
     @Override
     public Set<Vertex> targetVertices() {
         Set<Vertex> target = new HashSet<>();
-        target.add(super.vertices.get(0));
+        target.add(super.vertices.get(1));
         return target;
     }
 }
