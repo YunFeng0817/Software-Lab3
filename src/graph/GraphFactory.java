@@ -73,7 +73,6 @@ abstract public class GraphFactory {
                 String label = matcher.group(1);
                 String type = matcher.group(2);
                 String attr = matcher.group(3);
-                System.out.println(attr);
                 vertices.add(new ArrayList<>(Arrays.asList(label, type, attr)));
             }
         }

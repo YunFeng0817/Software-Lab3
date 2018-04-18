@@ -66,6 +66,11 @@ public abstract class Vertex {
     }
 
     @Override
+    public String toString() {
+        return label;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         return obj != null && obj instanceof Vertex && ((Vertex) obj).getLabel().equals(this.getLabel());
     }

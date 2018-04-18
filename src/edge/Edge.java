@@ -46,6 +46,11 @@ abstract public class Edge {
     }
 
     @Override
+    public String toString() {
+        return label;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         return obj != null && obj instanceof Edge && ((Edge) obj).getLabel().equals(this.getLabel());
     }
