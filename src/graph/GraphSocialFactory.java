@@ -18,7 +18,7 @@ public class GraphSocialFactory {
         Matcher matcher;
         // get graph name
         String graphName = GraphFactory.GraphLabel(filePath);
-        socialNetwork = new NetworkTopology(graphName);
+        socialNetwork = new SocialNetwork(graphName);
         // get Vertices from the file
         List<List<String>> vertexCut = GraphFactory.getVertices(filePath);
         List<Vertex> vertices = new ArrayList<>();

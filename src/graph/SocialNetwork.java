@@ -1,7 +1,6 @@
 package graph;
 
 import edge.Edge;
-import vertex.Vertex;
 
 public class SocialNetwork extends ConcreteGraph {
     public SocialNetwork(String label) {

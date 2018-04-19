@@ -24,7 +24,7 @@ public class Person extends Vertex {
     void fillVertexInfo(String[] args) throws NumberFormatException {
         if (args.length == 2) {
             gender = args[0];
-            age = Integer.parseInt(args[2]);
+            age = Integer.parseInt(args[1]);
         } else {
             throw new RuntimeException("the Person must have both gender and age,but miss at least one");
         }

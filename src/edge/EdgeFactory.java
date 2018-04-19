@@ -11,6 +11,12 @@ public class EdgeFactory {
                 return poetEdgeFactory.createEdge(label, vertices, weight);
             case "NetworkConnection":
                 return networkEdgeFactory.createEdge(label, vertices, weight);
+            case "ForwardTie":
+                return forwardEdgeFactory.createEdge(label, vertices, weight);
+            case "FriendTie":
+                return friendEdgeFactory.createEdge(label, vertices, weight);
+            case "CommentTie":
+                return commentEdgeFactory.createEdge(label, vertices, weight);
             default:
                 throw new RuntimeException("form of the file is wrong!");
         }
