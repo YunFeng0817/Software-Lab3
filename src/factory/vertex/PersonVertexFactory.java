@@ -1,11 +1,11 @@
 package factory.vertex;
 
-import vertex.Computer;
+import vertex.Person;
 import vertex.Vertex;
 
-public class DirectorVertexFactory {
+class PersonVertexFactory {
     static Vertex createVertex(String label, String[] args) {
-        Vertex newVertex = new Computer(label);
+        Vertex newVertex = new Person(label);
         newVertex.fillVertexInfo(args);
         return newVertex;
     }

@@ -14,7 +14,13 @@ abstract public class VertexFactory {
             case "Server":
                 return ServerVertexFactory.createVertex(label, args);
             case "Person":
-                return personVertexFactory.createVertex(label, args);
+                return PersonVertexFactory.createVertex(label, args);
+            case "Actor":
+                return ActorVertexFactory.createVertex(label, args);
+            case "Movie":
+                return MovieVertexFactory.createVertex(label, args);
+            case "Director":
+                return DirectorVertexFactory.createVertex(label, args);
             default:
                 return null;
         }
