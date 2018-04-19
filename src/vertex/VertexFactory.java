@@ -11,6 +11,8 @@ abstract public class VertexFactory {
                 return RouterVertexFactory.createVertex(label, args);
             case "Server":
                 return ServerVertexFactory.createVertex(label, args);
+            case "Person":
+                return personVertexFactory.createVertex(label, args);
             default:
                 return null;
         }
