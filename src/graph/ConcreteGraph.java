@@ -4,14 +4,13 @@ import edge.Edge;
 import vertex.Vertex;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ConcreteGraph implements Graph {
     private final String label;
     private final List<Vertex> vertices = new LinkedList<>();
     private final List<Edge> edges = new LinkedList<>();
 
-    public ConcreteGraph(String label) {
+    ConcreteGraph(String label) {
         this.label = label;
     }
 
@@ -31,9 +30,7 @@ public class ConcreteGraph implements Graph {
     @Override
     public boolean removeVertex(Vertex vertex) {
         if (vertices.remove(vertex)) {
-            vertex.getInEdges().forEach(item -> item.sourceVertices().forEach(o -> o.removeEdge(item)));
-            vertex.getOutEdges().forEach(item -> item.targetVertices().forEach(o -> o.removeEdge(item)));
-            edges.removeIf(item -> item.vertices().contains(vertex));
+            edges.stream().filter(item -> item.vertices().contains(vertex)).forEach(this::removeEdge);
             return true;
         }
         return false;
@@ -84,7 +81,8 @@ public class ConcreteGraph implements Graph {
 
     @Override
     public boolean addEdge(Edge edge) {
-        if (edges.add(edge)) {
+        if (!edges.contains(edge)) {
+            edges.add(edge);
             // add edge to the vertex,as out edges
             this.vertices.stream().filter(item -> edge.sourceVertices().contains(item)).forEach(item -> item.addOutEdge(edge));
             // add edge to the vertex as in edges
