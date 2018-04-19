@@ -1,7 +1,5 @@
 package vertex;
 
-import com.sun.org.apache.xpath.internal.operations.Equals;
-
 import java.util.Arrays;
 
 public class Person extends Vertex {
