@@ -1,5 +1,6 @@
 package application;
 
+import factory.graph.GraphFactory;
 import graph.*;
 import vertex.Vertex;
 

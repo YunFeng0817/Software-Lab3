@@ -1,7 +1,7 @@
 package edge;
 
 public class WordEdge extends DirectedEdge {
-    WordEdge(String label, double weight) {
+    public WordEdge(String label, double weight) {
         super(label, weight);
     }
 }

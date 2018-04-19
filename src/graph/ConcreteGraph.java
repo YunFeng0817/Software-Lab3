@@ -10,7 +10,7 @@ public class ConcreteGraph implements Graph {
     private final List<Vertex> vertices = new LinkedList<>();
     private final List<Edge> edges = new LinkedList<>();
 
-    ConcreteGraph(String label) {
+    public ConcreteGraph(String label) {
         this.label = label;
     }
 

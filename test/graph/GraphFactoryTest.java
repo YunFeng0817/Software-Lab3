@@ -2,6 +2,7 @@ package graph;
 
 import static org.junit.Assert.*;
 
+import factory.graph.*;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;

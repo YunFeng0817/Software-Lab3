@@ -1,8 +1,10 @@
-package graph;
+package factory.graph;
 
-import edge.EdgeFactory;
+import factory.edge.EdgeFactory;
+import graph.Graph;
+import graph.NetworkTopology;
 import vertex.Vertex;
-import vertex.VertexFactory;
+import factory.vertex.VertexFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;

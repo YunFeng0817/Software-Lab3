@@ -1,5 +1,7 @@
-package edge;
+package factory.edge;
 
+import edge.Edge;
+import factory.edge.networkEdgeFactory;
 import vertex.Vertex;
 
 import java.util.List;

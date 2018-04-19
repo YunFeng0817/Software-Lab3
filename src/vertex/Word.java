@@ -2,12 +2,12 @@ package vertex;
 
 public class Word extends Vertex {
 
-    Word(String label) {
+    public Word(String label) {
         super(label);
     }
 
     @Override
-    void fillVertexInfo(String[] args) {
+    public void fillVertexInfo(String[] args) {
         throw new UnsupportedOperationException();
     }
 

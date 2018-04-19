@@ -8,7 +8,7 @@ public class Person extends Vertex {
     private String gender;
     private int age;
 
-    Person(String label) {
+    public Person(String label) {
         super(label);
     }
 
@@ -21,7 +21,7 @@ public class Person extends Vertex {
     }
 
     @Override
-    void fillVertexInfo(String[] args) throws NumberFormatException {
+    public void fillVertexInfo(String[] args) throws NumberFormatException {
         if (args.length == 2) {
             gender = args[0];
             age = Integer.parseInt(args[1]);

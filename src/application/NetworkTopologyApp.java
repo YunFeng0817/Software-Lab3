@@ -1,14 +1,12 @@
 package application;
 
-import edge.Edge;
 import graph.Graph;
-import graph.GraphTopologyFactory;
-import vertex.Vertex;
+import factory.graph.GraphTopologyFactory;
 
 import java.io.IOException;
 import java.util.Collection;
 
-public class NetworkTopologyApp {
+class NetworkTopologyApp {
     private Graph NetworkTopolopyApp;
 
     NetworkTopologyApp(String filePath) throws IOException {

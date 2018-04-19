@@ -6,16 +6,16 @@ public class Router extends Vertex {
     //    private int[] ip = new int[4];
     private String ip;
 
-    Router(String label) {
+    public Router(String label) {
         super(label);
     }
 
-    public String getIp() {
+    private String getIp() {
         return ip;
     }
 
     @Override
-    void fillVertexInfo(String[] args) throws NumberFormatException {
+    public void fillVertexInfo(String[] args) throws NumberFormatException {
         if (args.length == 1) {
 //            String values[] = args[0].split(".");
 //            for (int i = 0; i < values.length; i++) {

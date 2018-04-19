@@ -1,16 +1,18 @@
-package edge;
+package factory.edge;
 
+import edge.CommentConnection;
+import edge.Edge;
 import vertex.Vertex;
 
 import java.util.List;
 
-public class commentEdgeFactory {
+class friendEdgeFactory {
     static Edge createEdge(String label, List<Vertex> vertices, double weight) {
-        Edge commentConnection = new CommentConnection(label, weight);
+        Edge friendConnection = new CommentConnection(label, weight);
         if (vertices.get(0).equals(vertices.get(1))) {
             throw new UnsupportedOperationException("One comment connection edge can't be a loop");
         }
-        commentConnection.addVertices(vertices);
-        return commentConnection;
+        friendConnection.addVertices(vertices);
+        return friendConnection;
     }
 }

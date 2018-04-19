@@ -1,4 +1,7 @@
-package vertex;
+package factory.vertex;
+
+import vertex.Person;
+import vertex.Vertex;
 
 class personVertexFactory {
     static Vertex createVertex(String label, String[] args) {

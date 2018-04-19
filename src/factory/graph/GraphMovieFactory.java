@@ -1,4 +1,6 @@
-package graph;
+package factory.graph;
+
+import graph.Graph;
 
 import java.io.IOException;
 

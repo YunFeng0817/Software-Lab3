@@ -1,4 +1,4 @@
-package vertex;
+package factory.vertex;
 
 public class DirectorVertexFactory {
 }

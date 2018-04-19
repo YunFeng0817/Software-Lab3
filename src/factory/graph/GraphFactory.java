@@ -1,4 +1,6 @@
-package graph;
+package factory.graph;
+
+import graph.Graph;
 
 import javax.activation.UnsupportedDataTypeException;
 import java.io.*;
@@ -56,7 +58,7 @@ abstract public class GraphFactory {
         }
     }
 
-    static List<List<String>> getVertices(String filePath) throws IOException {
+    public static List<List<String>> getVertices(String filePath) throws IOException {
         List<List<String>> vertices = new ArrayList<>();
         BufferedReader fileReader = new BufferedReader(new FileReader(filePath));
         Pattern regex;
@@ -79,7 +81,7 @@ abstract public class GraphFactory {
         return vertices;
     }
 
-    static List<List<String>> getEdges(String filePath) throws IOException {
+    public static List<List<String>> getEdges(String filePath) throws IOException {
         List<List<String>> vertices = new ArrayList<>();
         BufferedReader fileReader = new BufferedReader(new FileReader(filePath));
         Pattern regex;

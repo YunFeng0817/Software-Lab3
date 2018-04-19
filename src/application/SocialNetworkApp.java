@@ -1,12 +1,12 @@
 package application;
 
 import graph.Graph;
-import graph.GraphFactory;
+import factory.graph.GraphFactory;
 
 import java.io.IOException;
 
-public class SocialNetworkApp {
-    Graph socialNetworkGraph;
+class SocialNetworkApp {
+    private Graph socialNetworkGraph;
 
     SocialNetworkApp(String filePath) throws IOException {
         socialNetworkGraph = GraphFactory.createGraph(filePath);

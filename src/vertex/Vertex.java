@@ -14,7 +14,7 @@ public abstract class Vertex {
         this.label = label;
     }
 
-    abstract void fillVertexInfo(String[] args);
+    public abstract void fillVertexInfo(String[] args);
 
     public boolean addInEdge(Edge inEdge) {
         if (!inEdges.contains(inEdge) && inEdge.targetVertices().contains(this)) {

@@ -1,4 +1,6 @@
-package vertex;
+package factory.vertex;
+
+import vertex.Vertex;
 
 abstract public class VertexFactory {
     public static Vertex createVertex(String label, String type, String[] args) {
