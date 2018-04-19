@@ -1,11 +1,12 @@
 package factory.vertex;
 
+import vertex.Actor;
 import vertex.Computer;
 import vertex.Vertex;
 
-public class ActorVertexFactory {
+class ActorVertexFactory {
     static Vertex createVertex(String label, String[] args) {
-        Vertex newVertex = new Computer(label);
+        Vertex newVertex = new Actor(label);
         newVertex.fillVertexInfo(args);
         return newVertex;
     }

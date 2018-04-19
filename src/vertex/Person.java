@@ -12,11 +12,11 @@ public class Person extends Vertex {
         super(label);
     }
 
-    public String getGender() {
+    private String getGender() {
         return gender;
     }
 
-    public int getAge() {
+    private int getAge() {
         return age;
     }
 
@@ -26,7 +26,7 @@ public class Person extends Vertex {
             gender = args[0];
             age = Integer.parseInt(args[1]);
         } else {
-            throw new RuntimeException("the Person must have both gender and age,but miss at least one");
+            throw new RuntimeException("The Person must have both gender and age,but the number of parameter is wrong");
         }
     }
 

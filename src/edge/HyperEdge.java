@@ -11,6 +11,7 @@ public class HyperEdge extends Edge {
 
     HyperEdge(String label, double weight) {
         super(label, weight);
+        super.setWeight(-1);
     }
 
     @Override

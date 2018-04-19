@@ -1,7 +1,6 @@
 package factory.edge;
 
 import edge.Edge;
-import factory.edge.networkEdgeFactory;
 import vertex.Vertex;
 
 import java.util.List;
@@ -19,6 +18,12 @@ public class EdgeFactory {
                 return friendEdgeFactory.createEdge(label, vertices, weight);
             case "CommentTie":
                 return commentEdgeFactory.createEdge(label, vertices, weight);
+            case "MovieDirectorRelation":
+                return MovieDirectorEdgeFactory.createEdge(label, vertices, weight);
+            case "MovieActorRelation":
+                return MovieActorEdgeFactory.createEdge(label, vertices, weight);
+            case "SameMovieHyperEdge":
+                return SameMovieHyperEdgeFactory.createEdge(label, vertices, weight);
             default:
                 throw new RuntimeException("form of the file is wrong!");
         }

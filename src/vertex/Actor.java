@@ -4,7 +4,7 @@ public class Actor extends Vertex {
     private int age; // 演员的年龄
     private String gender;
 
-    Actor(String label) {
+    public Actor(String label) {
         super(label);
     }
 

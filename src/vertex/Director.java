@@ -4,7 +4,7 @@ public class Director extends Vertex {
     private int age;
     private String gender;
 
-    Director(String label) {
+    public Director(String label) {
         super(label);
     }
 
