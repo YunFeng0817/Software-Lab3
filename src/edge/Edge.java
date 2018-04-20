@@ -18,7 +18,7 @@ abstract public class Edge {
     }
 
     /**
-     * 得到边的labal属性值
+     * 得到边的label属性值
      * 是一个 observer函数
      *
      * @return label的值, 是String类型
