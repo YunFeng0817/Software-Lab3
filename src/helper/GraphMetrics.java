@@ -72,7 +72,9 @@ public class GraphMetrics {
         List<Vertex> vertices = new ArrayList<>();
         vertices.add(v);
         vertices.addAll(g.vertices());
-        double[][] e = floyd(vertices);
+        double[][] e = new double[vertices.size() + 1][vertices.size() + 1];
+        int[][] path = new int[vertices.size() + 1][vertices.size() + 1];
+        floyd(vertices, e, path);
         for (int i = 1; i <= vertices.size(); i++) {
             if (vertices.get(i).equals(v)) {
                 index = i;
@@ -87,14 +89,25 @@ public class GraphMetrics {
         return centrality;
     }
 
+    private void getpath(int start, int end, int[][] path, List<Integer> router) {
+        if (start == end)
+            return;
+        if (path[start][end] == 0) {
+            router.add(end);
+        } else {
+            getpath(start, path[start][end], path, router);
+            getpath(path[start][end], end, path, router);
+        }
+    }
+
     /**
      * 用floyd算法求最短路径
      *
      * @param vertices 图中已经排好序的所有顶点，排序是为了方便使用floyd算法求解
-     * @return 一个二维矩阵，存储图中任意两点之间的最短路径
+     * @param e        用来存储任意两个点之间的最短距离
+     * @param path     用来存储任意两个点之间的最短路径
      */
-    private static double[][] floyd(List<Vertex> vertices) {
-        double[][] e = new double[vertices.size() + 1][vertices.size() + 1];
+    private static void floyd(List<Vertex> vertices, double[][] e, int[][] path) {
         // 初始化数组
         for (int i = 1; i <= vertices.size(); i++) {
             for (int j = 1; j <= vertices.size(); j++) {
@@ -106,6 +119,7 @@ public class GraphMetrics {
                 } else {
                     e[i][j] = INFINITE; // 两个点之间没有直接的边连通的情况
                 }
+                path[i][j] = 0;
             }
         }
         // floyd核心算法
@@ -114,10 +128,10 @@ public class GraphMetrics {
                 for (int j = 1; j < vertices.size(); j++) {
                     if (e[i][k] + e[k][j] < e[i][j]) {
                         e[i][j] = e[i][k] + e[k][j];
+                        path[i][j] = k;
                     }
                 }
             }
         }
-        return e;
     }
 }
