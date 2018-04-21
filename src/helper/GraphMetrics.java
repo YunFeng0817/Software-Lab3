@@ -67,7 +67,7 @@ public class GraphMetrics {
      * @return closenessCentrality 的值
      */
     static double closenessCentrality(Graph g, Vertex v) {
-        int index = 0; // 保存v在数组中的下标
+        int index; // 保存v在数组中的下标
         double centrality = 0;
         List<Vertex> vertices = new ArrayList<>();
         vertices.add(v);
@@ -75,12 +75,8 @@ public class GraphMetrics {
         double[][] e = new double[vertices.size() + 1][vertices.size() + 1];
         int[][] path = new int[vertices.size() + 1][vertices.size() + 1];
         floyd(vertices, e, path);
-        for (int i = 1; i <= vertices.size(); i++) {
-            if (vertices.get(i).equals(v)) {
-                index = i;
-                break;
-            }
-        }
+        // 寻找指定的点在数组中的下标值
+        index = getIndex(vertices, v);
         for (int i = 1; i < vertices.size(); i++) {
             if (i != index) {
                 centrality += e[index][i] == INFINITE ? 0 : 1.0 / e[index][i];
@@ -89,6 +85,26 @@ public class GraphMetrics {
         return centrality;
     }
 
+    public static double betweennessCentrality(Graph g, Vertex v) {
+        int index = 0; // 保存v在数组中的下标
+        double centrality = 0;
+        List<Vertex> vertices = new ArrayList<>();
+        vertices.add(v);
+        vertices.addAll(g.vertices());
+        double[][] e = new double[g.vertices().size() + 1][g.vertices().size() + 1];
+        int[][] path = new int[vertices.size() + 1][vertices.size() + 1];
+        floyd(vertices, e, path);
+        // 寻找指定的点在数组中的下标值
+        getIndex(vertices, v);
+        return 0;
+    }
+
+    /**
+     * @param start  起点的index值
+     * @param end    终点的index值
+     * @param path   保存的任意两点之间的最短路径
+     * @param router 指定两点之间的最短路径
+     */
     private void getpath(int start, int end, int[][] path, List<Integer> router) {
         if (start == end)
             return;
@@ -133,5 +149,21 @@ public class GraphMetrics {
                 }
             }
         }
+    }
+
+    /**
+     * 寻找指定的元素在一个列表中的下标值
+     * 如果指定的元素不在该列表中，返回-1
+     *
+     * @param list 指定的列表
+     * @param item 需要求下标的元素
+     * @return 指定元素的下标值，如果列表中没有这个元素，返回-1
+     */
+    private static int getIndex(List<?> list, Object item) {
+        for (int i = 1; i <= list.size(); i++) {
+            if (list.get(i).equals(item))
+                return i;
+        }
+        return -1;
     }
 }
