@@ -85,18 +85,38 @@ public class GraphMetrics {
         return centrality;
     }
 
+    /**
+     * 求某个点的 BetweennessCentrality 值，这个值表示这个点在图中促进其他节点进行通信的能力
+     *
+     * @param g 图对象
+     * @param v 点对象
+     * @return BetweennessCentrality 的值
+     */
     public static double betweennessCentrality(Graph g, Vertex v) {
-        int index = 0; // 保存v在数组中的下标
+        int index; // 保存v在数组中的下标
         double centrality = 0;
+        int shortPathNum = 0, shortPathThroughVNum = 0;
         List<Vertex> vertices = new ArrayList<>();
         vertices.add(v);
         vertices.addAll(g.vertices());
-        double[][] e = new double[g.vertices().size() + 1][g.vertices().size() + 1];
+        double[][] e = new double[vertices.size() + 1][vertices.size() + 1];
         int[][] path = new int[vertices.size() + 1][vertices.size() + 1];
         floyd(vertices, e, path);
         // 寻找指定的点在数组中的下标值
-        getIndex(vertices, v);
-        return 0;
+        index = getIndex(vertices, v);
+        for (int i = 1; i <= vertices.size(); i++) {
+            for (int j = 1; j <= vertices.size(); j++) {
+                if (i != j) {
+                    List<Integer> router = new ArrayList<>();
+                    getpath(i, j, path, router);
+                    if (router.contains(index))
+                        shortPathThroughVNum++;
+                    if (router.size() != 0)
+                        shortPathNum++;
+                }
+            }
+        }
+        return shortPathThroughVNum / shortPathNum;
     }
 
     /**
@@ -105,7 +125,7 @@ public class GraphMetrics {
      * @param path   保存的任意两点之间的最短路径
      * @param router 指定两点之间的最短路径
      */
-    private void getpath(int start, int end, int[][] path, List<Integer> router) {
+    private static void getpath(int start, int end, int[][] path, List<Integer> router) {
         if (start == end)
             return;
         if (path[start][end] == 0) {
