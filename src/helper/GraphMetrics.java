@@ -94,7 +94,6 @@ public class GraphMetrics {
      */
     public static double betweennessCentrality(Graph g, Vertex v) {
         int index; // 保存v在数组中的下标
-        double centrality = 0;
         int shortPathNum = 0, shortPathThroughVNum = 0;
         List<Vertex> vertices = new ArrayList<>();
         vertices.add(v);
@@ -104,19 +103,20 @@ public class GraphMetrics {
         floyd(vertices, e, path);
         // 寻找指定的点在数组中的下标值
         index = getIndex(vertices, v);
-        for (int i = 1; i <= vertices.size(); i++) {
-            for (int j = 1; j <= vertices.size(); j++) {
-                if (i != j) {
+        for (int i = 1; i < vertices.size(); i++) {
+            for (int j = 1; j < vertices.size(); j++) {
+                if (i != j && e[i][j] != INFINITE) {
                     List<Integer> router = new ArrayList<>();
                     getpath(i, j, path, router);
-                    if (router.contains(index))
-                        shortPathThroughVNum++;
                     if (router.size() != 0)
                         shortPathNum++;
+                    router.add(i);
+                    if (router.contains(index))
+                        shortPathThroughVNum++;
                 }
             }
         }
-        return shortPathThroughVNum / shortPathNum;
+        return (double) shortPathThroughVNum / (double) shortPathNum;
     }
 
     /**
@@ -125,6 +125,7 @@ public class GraphMetrics {
      * @param path   保存的任意两点之间的最短路径
      * @param router 指定两点之间的最短路径
      */
+
     private static void getpath(int start, int end, int[][] path, List<Integer> router) {
         if (start == end)
             return;
@@ -145,8 +146,8 @@ public class GraphMetrics {
      */
     private static void floyd(List<Vertex> vertices, double[][] e, int[][] path) {
         // 初始化数组
-        for (int i = 1; i <= vertices.size(); i++) {
-            for (int j = 1; j <= vertices.size(); j++) {
+        for (int i = 1; i < vertices.size(); i++) {
+            for (int j = 1; j < vertices.size(); j++) {
                 Vertex source = vertices.get(i);
                 Vertex target = vertices.get(j);
                 Edge edge = source.getOutEdges().stream().filter(item -> item.vertices().size() <= 2 && item.targetVertices().contains(target)).min((o1, o2) -> (int) (o1.getWeight() - o2.getWeight())).orElse(null);
@@ -159,7 +160,7 @@ public class GraphMetrics {
             }
         }
         // floyd核心算法
-        for (int k = 1; k <= vertices.size(); k++) {
+        for (int k = 1; k < vertices.size(); k++) {
             for (int i = 1; i < vertices.size(); i++) {
                 for (int j = 1; j < vertices.size(); j++) {
                     if (e[i][k] + e[k][j] < e[i][j]) {
