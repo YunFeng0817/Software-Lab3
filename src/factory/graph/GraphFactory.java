@@ -78,6 +78,7 @@ abstract public class GraphFactory {
                 vertices.add(new ArrayList<>(Arrays.asList(label, type, attr)));
             }
         }
+        fileReader.close();
         return vertices;
     }
 
@@ -105,6 +106,7 @@ abstract public class GraphFactory {
                 vertices.add(new ArrayList<>(Arrays.asList(matcher.group(1), matcher.group(2), matcher.group(3))));
             }
         }
+        fileReader.close();
         return vertices;
     }
 }
