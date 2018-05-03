@@ -1,9 +1,11 @@
 package application;
 
+import graph.Graph;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 

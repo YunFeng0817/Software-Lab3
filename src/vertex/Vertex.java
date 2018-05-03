@@ -110,6 +110,18 @@ public abstract class Vertex {
         return label;
     }
 
+    /**
+     * 修改这个节点的label的信息，同时返回旧的label信息
+     *
+     * @param newLabel 传入新的label信息
+     * @return 返回旧的label信息
+     */
+    public String setLabel(String newLabel) {
+        String oldLabel = this.label;
+        this.label = newLabel;
+        return oldLabel;
+    }
+
     @Override
     public String toString() {
         return label;

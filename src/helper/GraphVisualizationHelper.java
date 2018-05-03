@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.Iterator;
 
 public class GraphVisualizationHelper {
-    private static void visualize(Graph g) {
+    public static void visualize(Graph g) {
         CircleLayout<Vertex, Edge> layout = new CircleLayout<>(transferGraph(g));
         layout.setSize(new Dimension(300, 300)); // sets the initial size of the space     // The BasicVisualizationServer<V,E> is parameterized by the edge types
         BasicVisualizationServer<Vertex, Edge> vv = new BasicVisualizationServer<>(layout);

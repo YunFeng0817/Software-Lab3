@@ -30,7 +30,7 @@ public class ConcreteGraph implements Graph {
     @Override
     public boolean removeVertex(Vertex vertex) {
         if (vertices.remove(vertex)) {
-            edges.stream().filter(item -> item.vertices().contains(vertex)).forEach(this::removeEdge);
+            edges.removeIf(item -> item.vertices().contains(vertex));
             return true;
         }
         return false;
