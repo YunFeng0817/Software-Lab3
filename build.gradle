@@ -27,9 +27,9 @@ sourceSets {
 }
 repositories {
     mavenCentral()
-    maven { url "https://sourceforge.net/projects/jung/files/latest/download?source=files" }
 }
 
 dependencies {
+    compile fileTree(dir:'lib',include:['*.jar'])
     testCompile 'junit:junit:4.11'
 }
