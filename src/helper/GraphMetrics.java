@@ -135,6 +135,23 @@ public class GraphMetrics {
         return (double) shortPathThroughVNum / (double) shortPathNum;
     }
 
+    public static double distance(Graph g, Vertex start, Vertex end) {
+        int startIndex, endIndex; // 保存start 和 end 在数组中的下标
+        double distance = 0;
+        List<Vertex> vertices = new ArrayList<>();
+        vertices.add(null);
+        vertices.addAll(g.vertices());
+        double[][] e = new double[vertices.size() + 1][vertices.size() + 1];
+        int[][] path = new int[vertices.size() + 1][vertices.size() + 1];
+        floyd(vertices, e, path);
+        // 寻找指定的点在数组中的下标值
+        startIndex = getIndex(vertices, start);
+        endIndex = getIndex(vertices, end);
+//        if(e[startIndex][endIndex]!=INFINITE)
+//            return
+        return 0;
+    }
+
     /**
      * @param start  起点的index值
      * @param end    终点的index值
