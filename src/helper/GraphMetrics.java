@@ -5,10 +5,26 @@ import graph.Graph;
 import vertex.Vertex;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class GraphMetrics {
     private final static Double INFINITE = 10000000.0;
+
+    /**
+     * 计算整个图的degree, 计算公式是图中度最大的值-所有点的度，然后累加 ，再除以图中点的个数
+     *
+     * @param g 传入的图对象
+     * @return 返回整个图的degree
+     */
+    public static double degreeCentrality(Graph g) {
+        int maxDegree = g.vertices().stream().map(item -> item.getInEdges().size()).max(Comparator.comparingInt(o -> o)).orElse(-1);
+        int sum = 0;
+        int size = g.vertices().size();
+        for (Vertex item : g.vertices())
+            sum += maxDegree - item.getInEdges().size();
+        return sum / (size * size - 3 * size + 2);
+    }
 
     /**
      * 获得一个无向图中点的 点度中心性
@@ -92,7 +108,7 @@ public class GraphMetrics {
      * @param v 点对象
      * @return BetweennessCentrality 的值
      */
-    public static double betweennessCentrality(Graph g, Vertex v) {
+    static double betweennessCentrality(Graph g, Vertex v) {
         int index; // 保存v在数组中的下标
         int shortPathNum = 0, shortPathThroughVNum = 0;
         List<Vertex> vertices = new ArrayList<>();

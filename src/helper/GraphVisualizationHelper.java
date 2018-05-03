@@ -2,7 +2,6 @@ package helper;
 
 import edge.Edge;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
-import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import edu.uci.ics.jung.graph.AbstractGraph;
 import edu.uci.ics.jung.graph.UndirectedOrderedSparseMultigraph;
@@ -22,10 +21,10 @@ import java.io.IOException;
 import java.util.Iterator;
 
 public class GraphVisualizationHelper {
-    public static void visualize(Graph g) {
-        Layout<Vertex, Edge> layout = new CircleLayout(transferGraph(g));
+    private static void visualize(Graph g) {
+        CircleLayout<Vertex, Edge> layout = new CircleLayout<>(transferGraph(g));
         layout.setSize(new Dimension(300, 300)); // sets the initial size of the space     // The BasicVisualizationServer<V,E> is parameterized by the edge types
-        BasicVisualizationServer<Vertex, Edge> vv = new BasicVisualizationServer<Vertex, Edge>(layout);
+        BasicVisualizationServer<Vertex, Edge> vv = new BasicVisualizationServer<>(layout);
         vv.setPreferredSize(new Dimension(600, 600)); //Sets the viewing area size
         JFrame frame = new JFrame("Simple Graph View");
 
@@ -37,11 +36,11 @@ public class GraphVisualizationHelper {
         Transformer<Edge, Stroke> edgeStrokeTransformer = s -> edgeStroke;
         vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);
         vv.getRenderContext().setEdgeStrokeTransformer(edgeStrokeTransformer);
-        vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
-        vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
+        vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<>());
+        vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller<>());
         vv.getRenderer().getVertexLabelRenderer().setPosition(Renderer.VertexLabel.Position.CNTR);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().add(vv);
         frame.pack();
         frame.setVisible(true);
