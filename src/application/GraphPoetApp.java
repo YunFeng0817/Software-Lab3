@@ -3,6 +3,7 @@ package application;
 import edge.Edge;
 import factory.edge.EdgeFactory;
 import factory.graph.GraphFactory;
+import factory.graph.GraphPoetFactory;
 import factory.vertex.VertexFactory;
 import graph.*;
 import helper.GraphVisualizationHelper;
@@ -13,6 +14,11 @@ import java.util.*;
 
 class GraphPoetApp {
     private Graph graphPoet;
+
+    public static void main(String[] args) throws IOException {
+        Graph graphPoet = GraphPoetFactory.createGraph("./test/graph/data/GraphPoet.txt");
+        GraphVisualizationHelper.visualize(graphPoet);
+    }
 
     GraphPoetApp(String filePath) throws IOException {
         graphPoet = GraphFactory.createGraph(filePath);
@@ -29,7 +35,9 @@ class GraphPoetApp {
         Edge specificEdge = graphPoet.edges().stream().filter(item -> item.getLabel().equals("2")).findFirst().orElse(null);
         graphPoet.removeEdge(specificEdge);
         specificEdge = graphPoet.edges().stream().filter(item -> item.getLabel().equals("3")).findFirst().orElse(null);
-        specificEdge.setLabel("Name");
+        if (specificEdge != null) {
+            specificEdge.setLabel("Name");
+        }
         newEdge.setLabel("changeLabel");
         newEdge.setWeight(2);
         GraphVisualizationHelper.visualize(graphPoet);

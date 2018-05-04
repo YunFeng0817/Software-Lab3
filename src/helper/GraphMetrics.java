@@ -125,8 +125,9 @@ public class GraphMetrics {
                     if (router.size() != 0)
                         shortPathNum++;
 //                    router.add(i);
-                    if (router.contains(index))
-                        shortPathThroughVNum++;
+//                    if (router.contains(index)) {
+//                        shortPathThroughVNum++;
+//                    }
                 }
             }
         }
@@ -157,9 +158,9 @@ public class GraphMetrics {
      * @param router 指定两点之间的最短路径
      */
 
-    private static void getpath(int start, int end, List<List<List<Integer>>> path, List<List<Integer>> router, int count) {
+    private static int getpath(int start, int end, List<List<List<Integer>>> path, List<List<Integer>> router, int count) {
         if (start == end)
-            return;
+            return count;
         if (path.get(start).get(end).get(0) == 0) {
             if (router.size() > 0 && router.size() - 1 >= count)
                 router.get(count).add(end);
@@ -167,10 +168,12 @@ public class GraphMetrics {
                 router.add(new ArrayList<>(Collections.singletonList(end)));
         } else {
             for (int i = 0; i < path.get(start).get(end).size(); i++) {
-                getpath(start, path.get(start).get(end).get(i), path, router, count + i);
-                getpath(path.get(start).get(end).get(i), end, path, router, count + i);
+                getpath(start, path.get(start).get(end).get(i), path, router, count);
+                getpath(path.get(start).get(end).get(i), end, path, router, count);
+                count++;
             }
         }
+        return count;
     }
 
     /**
@@ -206,7 +209,7 @@ public class GraphMetrics {
                         e[i][j] = e[i][k] + e[k][j];
                         path.get(i).get(j).removeIf(item -> true);
                         path.get(i).get(j).add(k);
-                    } else if (e[i][k] + e[k][j] == e[i][j]) {
+                    } else if (e[i][k] + e[k][j] == e[i][j] && e[i][j] != INFINITE) {
                         path.get(i).get(j).add(k);
                     }
                 }

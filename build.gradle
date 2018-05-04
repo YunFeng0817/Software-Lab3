@@ -4,7 +4,7 @@ tasks.withType(JavaCompile) {
 }
 //如果生成javadoc出现编码问题添加
 javadoc {
-    options{
+    options {
         encoding "UTF-8"
         charSet 'UTF-8'
         author true
@@ -30,6 +30,12 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir:'lib',include:['*.jar'])
-    testCompile 'junit:junit:4.11'
+    compile 'net.sf.jung:jung-api:2.0.1'
+    compile 'net.sf.jung:jung-graph-impl:2.0.1'
+    compile 'net.sf.jung:jung-algorithms:2.0.1'
+    compile 'net.sf.jung:jung-io:2.0.1'
+    compile 'net.sf.jung:jung-visualization:2.0.1'
+    compile 'net.sf.jung:jung-samples:2.0.1'
+
+    testCompile 'junit:junit:4.12'
 }
