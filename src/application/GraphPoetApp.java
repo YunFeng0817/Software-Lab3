@@ -15,14 +15,9 @@ import java.util.*;
 class GraphPoetApp {
     private Graph graphPoet;
 
-    public static void main(String[] args) throws IOException {
-        Graph graphPoet = GraphPoetFactory.createGraph("./test/graph/data/GraphPoet.txt");
-        GraphVisualizationHelper.visualize(graphPoet);
-    }
-
     GraphPoetApp(String filePath) throws IOException {
         graphPoet = GraphFactory.createGraph(filePath);
-//        GraphVisualizationHelper.visualize(graphPoet);
+        GraphVisualizationHelper.visualize(graphPoet);
         Vertex newVertex1 = VertexFactory.createVertex("newVertex1", "Word", null);
         Vertex newVertex2 = VertexFactory.createVertex("newVertex2", "Word", null);
         graphPoet.addVertex(newVertex1);

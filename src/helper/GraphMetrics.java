@@ -1,8 +1,12 @@
 package helper;
 
 import edge.Edge;
+import edu.uci.ics.jung.algorithms.importance.BetweennessCentrality;
 import graph.Graph;
 import vertex.Vertex;
+
+import edu.uci.ics.jung.graph.AbstractGraph;
+import edu.uci.ics.jung.algorithms.shortestpath.DijkstraDistance;
 
 import java.util.*;
 
@@ -107,47 +111,17 @@ public class GraphMetrics {
      * @return BetweennessCentrality 的值
      */
     static double betweennessCentrality(Graph g, Vertex v) {
-        int index; // 保存v在数组中的下标
-        int shortPathNum = 0, shortPathThroughVNum = 0;
-        List<Vertex> vertices = new ArrayList<>();
-        vertices.add(v);
-        vertices.addAll(g.vertices());
-        double[][] e = new double[vertices.size() + 1][vertices.size() + 1];
-        List<List<List<Integer>>> path = new ArrayList<>();
-        floyd(vertices, e, path);
-        // 寻找指定的点在数组中的下标值
-        index = getIndex(vertices, v);
-        for (int i = 1; i < vertices.size(); i++) {
-            for (int j = 1; j < vertices.size(); j++) {
-                if (i != j && e[i][j] != INFINITE) {
-                    List<List<Integer>> router = new ArrayList<>();
-                    getpath(i, j, path, router, 0);
-                    if (router.size() != 0)
-                        shortPathNum++;
-//                    router.add(i);
-//                    if (router.contains(index)) {
-//                        shortPathThroughVNum++;
-//                    }
-                }
-            }
-        }
-        return (double) shortPathThroughVNum / (double) shortPathNum;
+        AbstractGraph<Vertex, Edge> graph = GraphVisualizationHelper.transferGraph(g);
+        BetweennessCentrality<Vertex, Edge> ranker = new BetweennessCentrality<>(graph);
+        ranker.step();
+        return ranker.getVertexRankScore(v);
     }
 
     public static double distance(Graph g, Vertex start, Vertex end) {
-        int startIndex, endIndex; // 保存start 和 end 在数组中的下标
-        double distance = 0;
-        List<Vertex> vertices = new ArrayList<>();
-        vertices.add(null);
-        vertices.addAll(g.vertices());
-        double[][] e = new double[vertices.size() + 1][vertices.size() + 1];
-        List<List<List<Integer>>> path = new ArrayList<>();
-        floyd(vertices, e, path);
-        // 寻找指定的点在数组中的下标值
-        startIndex = getIndex(vertices, start);
-        endIndex = getIndex(vertices, end);
-//        if(e[startIndex][endIndex]!=INFINITE)
-//            return
+        AbstractGraph<Vertex, Edge> graph = GraphVisualizationHelper.transferGraph(g);
+        DijkstraDistance<Vertex, Edge> dijkstraDistance = new DijkstraDistance<>(graph);
+        dijkstraDistance.getDistance(start, end);
+        
         return 0;
     }
 
@@ -225,7 +199,7 @@ public class GraphMetrics {
      * @param item 需要求下标的元素
      * @return 指定元素的下标值，如果列表中没有这个元素，返回-1
      */
-    private static int getIndex(List<?> list, Object item) {
+    private static int getIndex(List<?> list, Vertex item) {
         for (int i = 1; i <= list.size(); i++) {
             if (list.get(i).equals(item))
                 return i;

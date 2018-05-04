@@ -80,8 +80,8 @@ public class GraphMetricsTest {
      */
     @Test
     public void testBetweennessCentrality() throws Exception {
-        assertEquals(0.17777777777777778, GraphMetrics.betweennessCentrality(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("seek")).findFirst().orElse(null)), 0.00001);
-        assertEquals(0.43333333333333335, GraphMetrics.betweennessCentrality(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("to")).findFirst().orElse(null)), 0.00001);
+        assertEquals(1.5, GraphMetrics.betweennessCentrality(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("seek")).findFirst().orElse(null)), 0.00001);
+        assertEquals(4, GraphMetrics.betweennessCentrality(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("to")).findFirst().orElse(null)), 0.00001);
     }
 
 
@@ -104,14 +104,14 @@ public class GraphMetricsTest {
         method.invoke(temp, vertices, e, path);
         method = temp.getClass().getDeclaredMethod("getpath", int.class, int.class, List.class, List.class, int.class);
         method.setAccessible(true);
-//        for (Vertex a : vertices) {
-//            System.out.println(a.getLabel());
-//        }
-//        method.invoke(temp, 1, 5, path, router, 0);
-//        assertEquals(new ArrayList<List<Integer>>(Arrays.asList(new ArrayList<>(Arrays.asList(2, 5)))), router);
+        for (Vertex a : vertices) {
+            System.out.println(a.getLabel());
+        }
+        method.invoke(temp, 1, 5, path, router, 0);
+        assertEquals(new ArrayList<List<Integer>>(Arrays.asList(new ArrayList<>(Arrays.asList(2, 5)))), router);
         router = new ArrayList<>();
         method.invoke(temp, 5, 4, path, router, 0);
-        assertEquals(new ArrayList<>(Arrays.asList(new ArrayList<>(Arrays.asList(3, 8, 1, 9, 4)), new ArrayList<>(Arrays.asList(7, 10, 1, 9, 4)))), router);
+        assertEquals(new ArrayList<>(Arrays.asList(new ArrayList<>(Arrays.asList(3, 8, 1, 9, 4)), new ArrayList<>(Arrays.asList(7, 10, 1, 9,7, 10, 1, 9, 4)))), router);
 /*
 try {
    Method method = GraphMetrics.getClass().getMethod("getpath", int.class, int.class, int[][].class, List<Integer>.class);
