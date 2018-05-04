@@ -4,9 +4,7 @@ import edge.Edge;
 import graph.Graph;
 import vertex.Vertex;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class GraphMetrics {
     private final static Double INFINITE = 10000000.0;
@@ -89,7 +87,7 @@ public class GraphMetrics {
         vertices.add(v);
         vertices.addAll(g.vertices());
         double[][] e = new double[vertices.size() + 1][vertices.size() + 1];
-        int[][] path = new int[vertices.size() + 1][vertices.size() + 1];
+        List<List<List<Integer>>> path = new ArrayList<>();
         floyd(vertices, e, path);
         // 寻找指定的点在数组中的下标值
         index = getIndex(vertices, v);
@@ -115,18 +113,18 @@ public class GraphMetrics {
         vertices.add(v);
         vertices.addAll(g.vertices());
         double[][] e = new double[vertices.size() + 1][vertices.size() + 1];
-        int[][] path = new int[vertices.size() + 1][vertices.size() + 1];
+        List<List<List<Integer>>> path = new ArrayList<>();
         floyd(vertices, e, path);
         // 寻找指定的点在数组中的下标值
         index = getIndex(vertices, v);
         for (int i = 1; i < vertices.size(); i++) {
             for (int j = 1; j < vertices.size(); j++) {
                 if (i != j && e[i][j] != INFINITE) {
-                    List<Integer> router = new ArrayList<>();
-                    getpath(i, j, path, router);
+                    List<List<Integer>> router = new ArrayList<>();
+                    getpath(i, j, path, router, 0);
                     if (router.size() != 0)
                         shortPathNum++;
-                    router.add(i);
+//                    router.add(i);
                     if (router.contains(index))
                         shortPathThroughVNum++;
                 }
@@ -142,7 +140,7 @@ public class GraphMetrics {
         vertices.add(null);
         vertices.addAll(g.vertices());
         double[][] e = new double[vertices.size() + 1][vertices.size() + 1];
-        int[][] path = new int[vertices.size() + 1][vertices.size() + 1];
+        List<List<List<Integer>>> path = new ArrayList<>();
         floyd(vertices, e, path);
         // 寻找指定的点在数组中的下标值
         startIndex = getIndex(vertices, start);
@@ -159,14 +157,19 @@ public class GraphMetrics {
      * @param router 指定两点之间的最短路径
      */
 
-    private static void getpath(int start, int end, int[][] path, List<Integer> router) {
+    private static void getpath(int start, int end, List<List<List<Integer>>> path, List<List<Integer>> router, int count) {
         if (start == end)
             return;
-        if (path[start][end] == 0) {
-            router.add(end);
+        if (path.get(start).get(end).get(0) == 0) {
+            if (router.size() > 0 && router.size() - 1 >= count)
+                router.get(count).add(end);
+            else
+                router.add(new ArrayList<>(Collections.singletonList(end)));
         } else {
-            getpath(start, path[start][end], path, router);
-            getpath(path[start][end], end, path, router);
+            for (int i = 0; i < path.get(start).get(end).size(); i++) {
+                getpath(start, path.get(start).get(end).get(i), path, router, count + i);
+                getpath(path.get(start).get(end).get(i), end, path, router, count + i);
+            }
         }
     }
 
@@ -177,9 +180,12 @@ public class GraphMetrics {
      * @param e        用来存储任意两个点之间的最短距离
      * @param path     用来存储任意两个点之间的最短路径
      */
-    private static void floyd(List<Vertex> vertices, double[][] e, int[][] path) {
+    private static void floyd(List<Vertex> vertices, double[][] e, List<List<List<Integer>>> path) {
         // 初始化数组
+        path.add(null);
         for (int i = 1; i < vertices.size(); i++) {
+            path.add(new ArrayList<>());
+            path.get(i).add(null);
             for (int j = 1; j < vertices.size(); j++) {
                 Vertex source = vertices.get(i);
                 Vertex target = vertices.get(j);
@@ -189,7 +195,7 @@ public class GraphMetrics {
                 } else {
                     e[i][j] = INFINITE; // 两个点之间没有直接的边连通的情况
                 }
-                path[i][j] = 0;
+                path.get(i).add(new ArrayList<>(Collections.singleton(0)));
             }
         }
         // floyd核心算法
@@ -198,7 +204,10 @@ public class GraphMetrics {
                 for (int j = 1; j < vertices.size(); j++) {
                     if (e[i][k] + e[k][j] < e[i][j]) {
                         e[i][j] = e[i][k] + e[k][j];
-                        path[i][j] = k;
+                        path.get(i).get(j).removeIf(item -> true);
+                        path.get(i).get(j).add(k);
+                    } else if (e[i][k] + e[k][j] == e[i][j]) {
+                        path.get(i).get(j).add(k);
                     }
                 }
             }

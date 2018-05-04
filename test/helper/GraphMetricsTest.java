@@ -95,21 +95,21 @@ public class GraphMetricsTest {
         vertices.add(vertex);
         vertices.addAll(poet.vertices());
         double[][] e = new double[vertices.size() + 1][vertices.size() + 1];
-        int[][] path = new int[vertices.size() + 1][vertices.size() + 1];
-        List<Integer> router = new ArrayList<>();
+        List<List<List<Integer>>> path = new ArrayList<>();
+        List<List<Integer>> router = new ArrayList<>();
         GraphMetrics temp = new GraphMetrics();
-        Method method = temp.getClass().getDeclaredMethod("floyd", List.class, double[][].class, int[][].class);
+        Method method = temp.getClass().getDeclaredMethod("floyd", List.class, double[][].class, List.class);
         method.setAccessible(true);
         method.invoke(temp, vertices, e, path);
-        method = temp.getClass().getDeclaredMethod("getpath", int.class, int.class, int[][].class, List.class);
+        method = temp.getClass().getDeclaredMethod("getpath", int.class, int.class, List.class, List.class, int.class);
         method.setAccessible(true);
 //        for (Vertex a : vertices) {
 //            System.out.println(a.getLabel());
 //        }
-        method.invoke(temp, 1, 5, path, router);
+        method.invoke(temp, 1, 5, path, router, 0);
         assertEquals(new ArrayList<>(Arrays.asList(2, 5)), router);
         router = new ArrayList<>();
-        method.invoke(temp, 5, 4, path, router);
+        method.invoke(temp, 5, 4, path, router,0);
         assertEquals(new ArrayList<>(Arrays.asList(3, 8, 1, 9, 4)), router);
 /*
 try {
