@@ -81,7 +81,7 @@ public class GraphMetricsTest {
     @Test
     public void testBetweennessCentrality() throws Exception {
         assertEquals(1.5, GraphMetrics.betweennessCentrality(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("seek")).findFirst().orElse(null)), 0.00001);
-        assertEquals(4, GraphMetrics.betweennessCentrality(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("to")).findFirst().orElse(null)), 0.00001);
+        assertEquals(4, GraphMetrics.betweennessCentrality(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("and")).findFirst().orElse(null)), 0.00001);
     }
 
 

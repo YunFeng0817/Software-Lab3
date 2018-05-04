@@ -1,4 +1,7 @@
 package graph;
 
-public class GraphPoet {
+public class GraphPoet extends ConcreteGraph {
+    public GraphPoet(String label) {
+        super(label);
+    }
 }

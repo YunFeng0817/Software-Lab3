@@ -3,6 +3,7 @@ package factory.graph;
 import factory.edge.EdgeFactory;
 import graph.ConcreteGraph;
 import graph.Graph;
+import graph.GraphPoet;
 import vertex.Vertex;
 import factory.vertex.VertexFactory;
 
@@ -16,7 +17,7 @@ public class GraphPoetFactory {
         Graph poet;
         // graph name
         String graphName = GraphFactory.GraphLabel(filePath);
-        poet = new ConcreteGraph(graphName);
+        poet = new GraphPoet(graphName);
         // get Vertices from the file
         List<List<String>> vertexCut = GraphFactory.getVertices(filePath);
         List<Vertex> vertices = new ArrayList<>();

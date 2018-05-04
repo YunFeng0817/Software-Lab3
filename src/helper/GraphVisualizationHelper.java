@@ -1,9 +1,11 @@
 package helper;
 
+import edge.DirectedEdge;
 import edge.Edge;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import edu.uci.ics.jung.graph.AbstractGraph;
+import edu.uci.ics.jung.graph.SparseMultigraph;
 import edu.uci.ics.jung.graph.UndirectedOrderedSparseMultigraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
@@ -61,15 +63,13 @@ public class GraphVisualizationHelper {
 
 
     public static AbstractGraph<Vertex, Edge> transferGraph(Graph g) {
-        AbstractGraph<Vertex, Edge> graph;
+        AbstractGraph<Vertex, Edge> graph = new SparseMultigraph<>();
         if (g instanceof GraphPoet || g instanceof SocialNetwork) {
-            graph = new DirectedSparseMultigraph<>();
             for (Edge item : g.edges()) {
                 Iterator<Vertex> iterator = item.vertices().iterator();
                 graph.addEdge(item, iterator.next(), iterator.next(), EdgeType.DIRECTED);
             }
         } else {
-            graph = new UndirectedOrderedSparseMultigraph<>();
             for (Edge item : g.edges()) {
                 Iterator<Vertex> iterator = item.vertices().iterator();
                 graph.addEdge(item, iterator.next(), iterator.next(), EdgeType.UNDIRECTED);
