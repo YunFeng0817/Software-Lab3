@@ -1,10 +1,40 @@
 package vertex;
 
+import edge.Edge;
+
 import java.util.Arrays;
 
 public class Person extends Vertex {
     private String gender;
     private int age;
+    private double weight = 0;
+
+    @Override
+    public boolean addInEdge(Edge inEdge) {
+        if (super.addInEdge(inEdge)) {
+            weight = this.getInEdges().size();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean removeEdge(Edge edge) {
+        if (super.removeEdge(edge)) {
+            weight = this.getInEdges().size();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 返回person的权重，表示这个用户的社交影响力
+     *
+     * @return person节点的权重
+     */
+    public double getWeight() {
+        return weight;
+    }
 
     public Person(String label) {
         super(label);
