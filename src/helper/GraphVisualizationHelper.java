@@ -13,7 +13,6 @@ import factory.graph.GraphFactory;
 import graph.Graph;
 import graph.GraphPoet;
 import graph.SocialNetwork;
-import org.apache.commons.collections15.Transformer;
 import vertex.Vertex;
 
 import javax.swing.*;

@@ -1,18 +1,19 @@
 package helper;
 
 import graph.Graph;
+import graph.GraphPoet;
 
 import java.util.regex.*;
 
 public class ParseCommandHelper {
     public static void main(String[] args) {
-        Graph graph;
-
+        Graph graph = new GraphPoet("");
+        type(args, graph);
     }
 
-    static void command(String[] args, Command cmd) {
-        Pattern commandRule = Pattern.compile("\"--(.*)\"");
-        Matcher matcher = commandRule.matcher(args[2]);
+    private static void command(String[] args, Command cmd) {
+        Pattern commandRule = Pattern.compile("--(.*)");
+        Matcher matcher = commandRule.matcher(args[1]);
         String command;
         if (matcher.find()) {
             command = matcher.group(1);
@@ -28,7 +29,7 @@ public class ParseCommandHelper {
         }
     }
 
-    static void type(String[] args, Graph graph) {
+    private static void type(String[] args, Graph graph) {
         switch (args[0]) {
             case "vertex":
                 VertexCommand vertexCommand = new VertexCommand(graph);
