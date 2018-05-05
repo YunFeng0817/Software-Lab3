@@ -21,6 +21,8 @@ abstract public class VertexFactory {
                 return MovieVertexFactory.createVertex(label, args);
             case "Director":
                 return DirectorVertexFactory.createVertex(label, args);
+            case "":
+                return WirelessRouterFactory.createVertex(label, args);
             default:
                 return null;
         }
