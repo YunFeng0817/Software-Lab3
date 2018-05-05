@@ -160,6 +160,18 @@ class GraphMetrics {
     }
 
     /**
+     * 求给定图的diameter值
+     *
+     * @param g 给定的图对象
+     * @return 图g的diameter值
+     */
+    static double diameter(Graph g) {
+        List<Double> eccentricity = new ArrayList<>();
+        g.vertices().forEach(item -> eccentricity.add(eccentricity(g, item)));
+        return eccentricity.stream().max(Comparator.comparingDouble(item -> item)).orElse(INFINITE);
+    }
+
+    /**
      * @param start  起点的index值
      * @param end    终点的index值
      * @param path   保存的任意两点之间的最短路径
