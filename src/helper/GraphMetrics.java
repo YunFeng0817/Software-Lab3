@@ -11,7 +11,7 @@ import edu.uci.ics.jung.algorithms.shortestpath.DijkstraShortestPath;
 
 import java.util.*;
 
-public class GraphMetrics {
+class GraphMetrics {
     private final static Double INFINITE = 10000000.0;
 
     /**
@@ -20,7 +20,7 @@ public class GraphMetrics {
      * @param g 传入的图对象
      * @return 返回整个图的degree
      */
-    public static double degreeCentrality(Graph g) {
+    static double degreeCentrality(Graph g) {
         int maxDegree = g.vertices().stream().map(item -> item.getInEdges().size()).max(Comparator.comparingInt(o -> o)).orElse(-1);
         int sum = 0;
         int size = g.vertices().size();
@@ -118,7 +118,15 @@ public class GraphMetrics {
         return ranker.getVertexRankScore(v);
     }
 
-    public static double distance(Graph g, Vertex start, Vertex end) {
+    /**
+     * 用于求图中两个点之间的最短路径的边的个数
+     *
+     * @param g     传入目标的图对象
+     * @param start 起始的顶点
+     * @param end   终止的顶点
+     * @return 两个点在图g中的最短路径的边的个数
+     */
+    static double distance(Graph g, Vertex start, Vertex end) {
         AbstractGraph<Vertex, Edge> graph = GraphVisualizationHelper.transferGraph(g);
         Transformer<Edge, Double> nev = edge -> edge.getWeight();
         DijkstraShortestPath<Vertex, Edge> dijkstraShortestPath = new DijkstraShortestPath<>(graph, nev);
@@ -133,9 +141,9 @@ public class GraphMetrics {
      * @param router 指定两点之间的最短路径
      */
 
-    private static int getpath(int start, int end, List<List<List<Integer>>> path, List<List<Integer>> router, int count) {
+    private static void getpath(int start, int end, List<List<List<Integer>>> path, List<List<Integer>> router, int count) {
         if (start == end)
-            return count;
+            return;
         if (path.get(start).get(end).get(0) == 0) {
             if (router.size() > 0 && router.size() - 1 >= count)
                 router.get(count).add(end);
@@ -148,7 +156,6 @@ public class GraphMetrics {
                 count++;
             }
         }
-        return count;
     }
 
     /**

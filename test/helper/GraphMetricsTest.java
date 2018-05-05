@@ -10,6 +10,7 @@ import vertex.Vertex;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -35,6 +36,14 @@ public class GraphMetricsTest {
 
     @After
     public void after() throws Exception {
+    }
+
+    /**
+     * Method: degreeCentrality(Graph g)
+     */
+    @Test
+    public void testGraphDegreeCentrality() throws Exception {
+        assertEquals(1, GraphMetrics.degreeCentrality(topologyNetwork), 0.001);
     }
 
     /**
@@ -84,6 +93,9 @@ public class GraphMetricsTest {
         assertEquals(8, GraphMetrics.betweennessCentrality(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("and")).findFirst().orElse(null)), 0.00001);
     }
 
+    /**
+     * Method: distance(Graph g, Vertex start, Vertex end)
+     */
     @Test
     public void testDistance() throws Exception {
         assertEquals(4, GraphMetrics.distance(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("seek")).findFirst().orElse(null), poet.vertices().stream().filter(item -> item.getLabel().equals("and")).findFirst().orElse(null)), 0.00001);
@@ -114,7 +126,7 @@ public class GraphMetricsTest {
             System.out.println(a.getLabel());
         }
         method.invoke(temp, 1, 5, path, router, 0);
-        assertEquals(new ArrayList<List<Integer>>(Arrays.asList(new ArrayList<>(Arrays.asList(2, 5)))), router);
+        assertEquals(new ArrayList<List<Integer>>(Collections.singletonList(new ArrayList<>(Arrays.asList(2, 5)))), router);
         router = new ArrayList<>();
         method.invoke(temp, 5, 4, path, router, 0);
         assertEquals(new ArrayList<>(Arrays.asList(new ArrayList<>(Arrays.asList(3, 8, 1, 9, 4)), new ArrayList<>(Arrays.asList(7, 10, 1, 9, 7, 10, 1, 9, 4)))), router);
