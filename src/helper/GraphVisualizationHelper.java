@@ -30,15 +30,11 @@ public class GraphVisualizationHelper {
         BasicVisualizationServer<Vertex, Edge> vv = new BasicVisualizationServer<>(layout);
         vv.setPreferredSize(new Dimension(600, 600)); //Sets the viewing area size
         JFrame frame = new JFrame("Simple Graph View");
-
-        Transformer<Vertex, Paint> vertexPaint = vertex -> Color.BLUE;
-        // Set up a new stroke Transformer for the edges
         float dash[] = {10.0f};
         final Stroke edgeStroke = new BasicStroke(1.0f, BasicStroke.CAP_BUTT,
                 BasicStroke.JOIN_MITER, 10.0f, dash, 0.0f);
-        Transformer<Edge, Stroke> edgeStrokeTransformer = s -> edgeStroke;
-        vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);
-        vv.getRenderContext().setEdgeStrokeTransformer(edgeStrokeTransformer);
+        vv.getRenderContext().setVertexFillPaintTransformer(Vertex -> Color.BLUE);
+        vv.getRenderContext().setEdgeStrokeTransformer(Edge -> edgeStroke);
         vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<>());
         vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller<>());
         vv.getRenderer().getVertexLabelRenderer().setPosition(Renderer.VertexLabel.Position.CNTR);
@@ -62,7 +58,7 @@ public class GraphVisualizationHelper {
     }
 
 
-    public static AbstractGraph<Vertex, Edge> transferGraph(Graph g) {
+    static AbstractGraph<Vertex, Edge> transferGraph(Graph g) {
         AbstractGraph<Vertex, Edge> graph = new SparseMultigraph<>();
         if (g instanceof GraphPoet || g instanceof SocialNetwork) {
             for (Edge item : g.edges()) {

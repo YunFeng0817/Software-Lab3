@@ -102,6 +102,32 @@ public class GraphMetricsTest {
         assertEquals(5, GraphMetrics.distance(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("to")).findFirst().orElse(null), poet.vertices().stream().filter(item -> item.getLabel().equals("and")).findFirst().orElse(null)), 0.00001);
     }
 
+    /**
+     * Method: eccentricity(Graph g, Vertex v)
+     */
+    @Test
+    public void testEccentricity() throws Exception {
+        assertEquals(6, GraphMetrics.eccentricity(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("seek")).findFirst().orElse(null)), 0.00001);
+        assertEquals(5, GraphMetrics.eccentricity(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("and")).findFirst().orElse(null)), 0.00001);
+        assertEquals(Double.POSITIVE_INFINITY, GraphMetrics.eccentricity(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("civilizations")).findFirst().orElse(null)), 0.00001);
+    }
+
+    /**
+     * Method: radius(Graph g)
+     */
+    @Test
+    public void testRadius() throws Exception {
+        assertEquals(4, GraphMetrics.radius(poet), 0.00001);
+    }
+
+    /**
+     * Method: diameter(Graph g)
+     */
+    @Test
+    public void testDiameter() throws Exception {
+        assertEquals(Double.POSITIVE_INFINITY, GraphMetrics.diameter(poet), 0.00001);
+    }
+
 
     /**
      * Method: getpath(int start, int end, int[][] path, List<Integer> router)

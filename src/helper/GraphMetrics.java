@@ -2,7 +2,6 @@ package helper;
 
 import edge.Edge;
 import graph.Graph;
-import org.apache.commons.collections15.Transformer;
 import vertex.Vertex;
 
 import edu.uci.ics.jung.graph.AbstractGraph;
@@ -127,11 +126,12 @@ class GraphMetrics {
      * @return 两个点在图g中的最短路径的边的个数
      */
     static double distance(Graph g, Vertex start, Vertex end) {
+        if (start.equals(end))
+            return 0;
         AbstractGraph<Vertex, Edge> graph = GraphVisualizationHelper.transferGraph(g);
-        Transformer<Edge, Double> nev = edge -> edge.getWeight();
-        DijkstraShortestPath<Vertex, Edge> dijkstraShortestPath = new DijkstraShortestPath<>(graph, nev);
-        List<Edge> paths = dijkstraShortestPath.getPath(start, end);
-        return paths.size();
+        DijkstraShortestPath<Vertex, Edge> dijkstraShortestPath = new DijkstraShortestPath<>(graph, Edge::getWeight);
+        int size = dijkstraShortestPath.getPath(start, end).size();
+        return size == 0 ? Double.POSITIVE_INFINITY : size;
     }
 
     /**
@@ -142,9 +142,11 @@ class GraphMetrics {
      * @return 点v在图g中的eccentricity值
      */
     static double eccentricity(Graph g, Vertex v) {
-        List<Double> distances = new ArrayList<>();
-        g.vertices().forEach(item -> distances.add(distance(g, v, item)));
-        return distances.stream().max(Comparator.comparingDouble(item -> item)).orElse(INFINITE);
+        return g.vertices()
+                .stream()
+                .mapToDouble(item -> distance(g, v, item))
+                .max()
+                .orElse(Double.POSITIVE_INFINITY);
     }
 
     /**
@@ -154,9 +156,11 @@ class GraphMetrics {
      * @return 图g的radius值
      */
     static double radius(Graph g) {
-        List<Double> eccentricity = new ArrayList<>();
-        g.vertices().forEach(item -> eccentricity.add(eccentricity(g, item)));
-        return eccentricity.stream().min(Comparator.comparingDouble(item -> item)).orElse(INFINITE);
+        return g.vertices()
+                .stream()
+                .mapToDouble(item -> eccentricity(g, item))
+                .min()
+                .orElse(Double.POSITIVE_INFINITY);
     }
 
     /**
@@ -166,9 +170,11 @@ class GraphMetrics {
      * @return 图g的diameter值
      */
     static double diameter(Graph g) {
-        List<Double> eccentricity = new ArrayList<>();
-        g.vertices().forEach(item -> eccentricity.add(eccentricity(g, item)));
-        return eccentricity.stream().max(Comparator.comparingDouble(item -> item)).orElse(INFINITE);
+        return g.vertices()
+                .stream()
+                .mapToDouble(item -> eccentricity(g, item))
+                .max()
+                .orElse(Double.POSITIVE_INFINITY);
     }
 
     /**
