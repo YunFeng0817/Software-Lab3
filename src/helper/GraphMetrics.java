@@ -135,6 +135,31 @@ class GraphMetrics {
     }
 
     /**
+     * 计算给点在给定图中的eccentricity值(这个点到其他所有点的distance的最大值)
+     *
+     * @param g 给定的图
+     * @param v 给定的点
+     * @return 点v在图g中的eccentricity值
+     */
+    static double eccentricity(Graph g, Vertex v) {
+        List<Double> distances = new ArrayList<>();
+        g.vertices().forEach(item -> distances.add(distance(g, v, item)));
+        return distances.stream().max(Comparator.comparingDouble(item -> item)).orElse(INFINITE);
+    }
+
+    /**
+     * 求给定图的radius值
+     *
+     * @param g 给定的图对象
+     * @return 图g的radius值
+     */
+    static double radius(Graph g) {
+        List<Double> eccentricity = new ArrayList<>();
+        g.vertices().forEach(item -> eccentricity.add(eccentricity(g, item)));
+        return eccentricity.stream().min(Comparator.comparingDouble(item -> item)).orElse(INFINITE);
+    }
+
+    /**
      * @param start  起点的index值
      * @param end    终点的index值
      * @param path   保存的任意两点之间的最短路径
