@@ -80,8 +80,14 @@ public class GraphMetricsTest {
      */
     @Test
     public void testBetweennessCentrality() throws Exception {
-        assertEquals(1.5, GraphMetrics.betweennessCentrality(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("seek")).findFirst().orElse(null)), 0.00001);
-        assertEquals(4, GraphMetrics.betweennessCentrality(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("and")).findFirst().orElse(null)), 0.00001);
+        assertEquals(11.5, GraphMetrics.betweennessCentrality(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("seek")).findFirst().orElse(null)), 0.00001);
+        assertEquals(8, GraphMetrics.betweennessCentrality(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("and")).findFirst().orElse(null)), 0.00001);
+    }
+
+    @Test
+    public void testDistance() throws Exception {
+        assertEquals(4, GraphMetrics.distance(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("seek")).findFirst().orElse(null), poet.vertices().stream().filter(item -> item.getLabel().equals("and")).findFirst().orElse(null)), 0.00001);
+        assertEquals(5, GraphMetrics.distance(poet, poet.vertices().stream().filter(item -> item.getLabel().equals("to")).findFirst().orElse(null), poet.vertices().stream().filter(item -> item.getLabel().equals("and")).findFirst().orElse(null)), 0.00001);
     }
 
 
@@ -111,7 +117,7 @@ public class GraphMetricsTest {
         assertEquals(new ArrayList<List<Integer>>(Arrays.asList(new ArrayList<>(Arrays.asList(2, 5)))), router);
         router = new ArrayList<>();
         method.invoke(temp, 5, 4, path, router, 0);
-        assertEquals(new ArrayList<>(Arrays.asList(new ArrayList<>(Arrays.asList(3, 8, 1, 9, 4)), new ArrayList<>(Arrays.asList(7, 10, 1, 9,7, 10, 1, 9, 4)))), router);
+        assertEquals(new ArrayList<>(Arrays.asList(new ArrayList<>(Arrays.asList(3, 8, 1, 9, 4)), new ArrayList<>(Arrays.asList(7, 10, 1, 9, 7, 10, 1, 9, 4)))), router);
 /*
 try {
    Method method = GraphMetrics.getClass().getMethod("getpath", int.class, int.class, int[][].class, List<Integer>.class);

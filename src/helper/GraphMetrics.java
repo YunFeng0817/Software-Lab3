@@ -1,12 +1,13 @@
 package helper;
 
 import edge.Edge;
-import edu.uci.ics.jung.algorithms.importance.BetweennessCentrality;
 import graph.Graph;
+import org.apache.commons.collections15.Transformer;
 import vertex.Vertex;
 
 import edu.uci.ics.jung.graph.AbstractGraph;
-import edu.uci.ics.jung.algorithms.shortestpath.DijkstraDistance;
+import edu.uci.ics.jung.algorithms.importance.BetweennessCentrality;
+import edu.uci.ics.jung.algorithms.shortestpath.DijkstraShortestPath;
 
 import java.util.*;
 
@@ -119,10 +120,10 @@ public class GraphMetrics {
 
     public static double distance(Graph g, Vertex start, Vertex end) {
         AbstractGraph<Vertex, Edge> graph = GraphVisualizationHelper.transferGraph(g);
-        DijkstraDistance<Vertex, Edge> dijkstraDistance = new DijkstraDistance<>(graph);
-        dijkstraDistance.getDistance(start, end);
-        
-        return 0;
+        Transformer<Edge, Double> nev = edge -> edge.getWeight();
+        DijkstraShortestPath<Vertex, Edge> dijkstraShortestPath = new DijkstraShortestPath<>(graph, nev);
+        List<Edge> paths = dijkstraShortestPath.getPath(start, end);
+        return paths.size();
     }
 
     /**

@@ -1,13 +1,11 @@
 package helper;
 
-import edge.DirectedEdge;
 import edge.Edge;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
-import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import edu.uci.ics.jung.graph.AbstractGraph;
 import edu.uci.ics.jung.graph.SparseMultigraph;
-import edu.uci.ics.jung.graph.UndirectedOrderedSparseMultigraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
+import edu.uci.ics.jung.graph.util.Pair;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import edu.uci.ics.jung.visualization.renderers.Renderer;
@@ -21,7 +19,9 @@ import vertex.Vertex;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
 
 public class GraphVisualizationHelper {
     public static void visualize(Graph g) {
@@ -66,8 +66,11 @@ public class GraphVisualizationHelper {
         AbstractGraph<Vertex, Edge> graph = new SparseMultigraph<>();
         if (g instanceof GraphPoet || g instanceof SocialNetwork) {
             for (Edge item : g.edges()) {
-                Iterator<Vertex> iterator = item.vertices().iterator();
-                graph.addEdge(item, iterator.next(), iterator.next(), EdgeType.DIRECTED);
+                List<Vertex> verticesList = new ArrayList<>();
+                verticesList.addAll(item.sourceVertices());
+                verticesList.addAll(item.targetVertices());
+                Pair<Vertex> vertices = new Pair<>(verticesList);
+                graph.addEdge(item, vertices, EdgeType.DIRECTED);
             }
         } else {
             for (Edge item : g.edges()) {
