@@ -5,6 +5,22 @@ import vertex.Vertex;
 
 import java.util.*;
 
+/**
+ * <p>
+ * Abstraction Function:
+ * label -> 点的唯一标识
+ * vertices -> 图中的所有点的集合
+ * edges -> 图中所有边的集合
+ * </p>
+ * <p>
+ * Rep Invariant:
+ * 无
+ * </p>
+ * <p>
+ * Safety from rep exposure:
+ * label ,vertices,edges 都是private属性
+ * </p>
+ */
 public class ConcreteGraph implements Graph {
     private final String label;
     private final List<Vertex> vertices = new LinkedList<>();
