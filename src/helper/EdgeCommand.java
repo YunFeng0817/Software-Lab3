@@ -131,8 +131,8 @@ class EdgeCommand extends Command {
         String newLabel;
         if (matcher.find()) {
             newLabel = matcher.group(1);
-            edge.setLabel(newLabel);
-            System.out.println("Update label successfully");
+            String oldLabel = edge.setLabel(newLabel);
+            System.out.println("Update label successfully , the old label is " + oldLabel);
         }
     }
 

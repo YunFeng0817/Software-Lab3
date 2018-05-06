@@ -81,8 +81,8 @@ class VertexCommand extends Command {
         String newLabel;
         if (matcher.find()) {
             newLabel = matcher.group(1);
-            vertex.setLabel(newLabel);
-            System.out.println("Update label successfully");
+            String oldLabel = vertex.setLabel(newLabel);
+            System.out.println("Update label successfully , old label is " + oldLabel);
         }
         Rule = Pattern.compile("argument=(.*)");
         matcher = Rule.matcher(OptionalCommand);

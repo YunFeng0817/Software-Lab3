@@ -7,6 +7,26 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * <p>
+ * Abstraction Function:
+ * label -> 点的唯一标识
+ * weight -> 边的权重值   -1表示这条边是无权重边
+ * vertices -> 边中的顶点
+ * 如果是有向边，vertices中的第一个点是起点，第二个点是终点
+ * 如果是无向边，vertices中的两个点没有先后关系
+ * 如果是超边，vertices可以是有多个点，点之间没有先后关系
+ * </p>
+ * <p>
+ * Rep Invariant:
+ * 如果是有向边和无向边，则vertices 的大小只能是2
+ * 如果是超边，则vertices的大小必须大于2
+ * </p>
+ * <p>
+ * Safety from rep exposure:
+ * label weight vertices 都是private属性
+ * </p>
+ */
 abstract public class Edge {
     protected final List<Vertex> vertices = new LinkedList<>();
     private String label;
@@ -37,10 +57,16 @@ abstract public class Edge {
         return weight;
     }
 
+    /**
+     * 设置图的label值
+     *
+     * @param newLabel 需要设定的新值
+     * @return 返回旧的label值
+     */
     public String setLabel(String newLabel) {
-        String oldLabel;
+        String oldLabel = label;
         label = newLabel;
-        return label;
+        return oldLabel;
     }
 
     /**

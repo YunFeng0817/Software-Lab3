@@ -4,6 +4,24 @@ import java.util.*;
 
 import edge.*;
 
+/**
+ * <p>
+ *     Abstraction Function:
+ *     label -> 点的唯一标识
+ *     inEdges -> 所有入边的集合
+ *     outEdges -> 所有出边的集合
+ * </p>
+ *
+ * <p>
+ *     Rep Invariant:
+ *     如果这个点在无向图中 ，则inEdges.size()=outEdges.size()
+ * </p>
+ *
+ * <p>
+ *     Safety from rep exposure:
+ *     label ,inEdges,outEdges 都是private属性
+ * </p>
+ */
 public abstract class Vertex {
     private String label;
 
