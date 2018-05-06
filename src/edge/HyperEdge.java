@@ -36,4 +36,8 @@ public class HyperEdge extends Edge {
     public Set<Vertex> targetVertices() {
         return super.vertices();
     }
+
+    public boolean removeVertex(Vertex vertex) {
+        return vertices.remove(vertex);
+    }
 }
