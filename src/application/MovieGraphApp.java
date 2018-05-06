@@ -2,11 +2,18 @@ package application;
 
 import factory.graph.GraphMovieFactory;
 import graph.Graph;
+import graph.MovieGraph;
+import helper.ParseCommandHelper;
 
 import java.io.IOException;
 
 class MovieGraphApp {
+
+    public static void main(String[] args) throws IOException {
+        new MovieGraphApp("./test/graph/data/GraphMovie.txt");
+    }
+
     MovieGraphApp(String filePath) throws IOException {
-        Graph movie = GraphMovieFactory.createGraph(filePath);
+        ParseCommandHelper.Command(filePath);
     }
 }

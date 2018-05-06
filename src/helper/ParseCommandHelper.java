@@ -8,8 +8,14 @@ import java.util.Scanner;
 import java.util.regex.*;
 
 public class ParseCommandHelper {
-    public static void main(String[] args) throws IOException {
-        Graph graph = GraphFactory.createGraph("./test/graph/data/GraphPoet.txt");
+    /**
+     * 用于图应用的命令行交互
+     *
+     * @param filePath 含有图语法信息的语法输入
+     * @throws IOException 文件读写的异常
+     */
+    public static void Command(String filePath) throws IOException {
+        Graph graph = GraphFactory.createGraph(filePath);
         String[] params;
         while (true) {
             System.out.print("Graph>>>");

@@ -7,6 +7,7 @@ import factory.graph.GraphPoetFactory;
 import factory.vertex.VertexFactory;
 import graph.*;
 import helper.GraphVisualizationHelper;
+import helper.ParseCommandHelper;
 import vertex.Vertex;
 
 import java.io.IOException;
@@ -15,27 +16,13 @@ import java.util.*;
 class GraphPoetApp {
     private Graph graphPoet;
 
+    public static void main(String[] args) throws IOException {
+        new GraphPoetApp("./test/graph/data/GraphPoet.txt");
+    }
+
     GraphPoetApp(String filePath) throws IOException {
         graphPoet = GraphFactory.createGraph(filePath);
-        GraphVisualizationHelper.visualize(graphPoet);
-        Vertex newVertex1 = VertexFactory.createVertex("newVertex1", "Word", null);
-        Vertex newVertex2 = VertexFactory.createVertex("newVertex2", "Word", null);
-        graphPoet.addVertex(newVertex1);
-        Vertex specificVertex = graphPoet.vertices().stream().filter(item -> item.getLabel().equals("to")).findFirst().orElse(null);
-        graphPoet.removeVertex(specificVertex);
-        if (newVertex1 != null)
-            newVertex1.setLabel("changeLabel");
-        Edge newEdge = EdgeFactory.createEdge("newEdge", "WordNeighborhood", new ArrayList<>(Arrays.asList(newVertex1, newVertex2)), 1);
-        graphPoet.addEdge(newEdge);
-        Edge specificEdge = graphPoet.edges().stream().filter(item -> item.getLabel().equals("2")).findFirst().orElse(null);
-        graphPoet.removeEdge(specificEdge);
-        specificEdge = graphPoet.edges().stream().filter(item -> item.getLabel().equals("3")).findFirst().orElse(null);
-        if (specificEdge != null) {
-            specificEdge.setLabel("Name");
-        }
-        newEdge.setLabel("changeLabel");
-        newEdge.setWeight(2);
-        GraphVisualizationHelper.visualize(graphPoet);
+        ParseCommandHelper.Command(filePath);
     }
 
     /**

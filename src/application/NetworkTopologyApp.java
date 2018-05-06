@@ -2,6 +2,7 @@ package application;
 
 import graph.Graph;
 import factory.graph.GraphTopologyFactory;
+import helper.ParseCommandHelper;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -9,9 +10,14 @@ import java.util.Collection;
 class NetworkTopologyApp {
     private Graph NetworkTopolopyApp;
 
+    public static void main(String[] args) throws IOException {
+        new NetworkTopologyApp("./test/graph/data/GraphTopology.txt");
+    }
+
     NetworkTopologyApp(String filePath) throws IOException {
         NetworkTopolopyApp = GraphTopologyFactory.createGraph(filePath);
-        iterator("vertices", NetworkTopolopyApp.vertices());
+        ParseCommandHelper.Command(filePath);
+//        iterator("vertices", NetworkTopolopyApp.vertices());
 //        iterator("edges", NetworkTopolopyApp.edges());
 //        for (Vertex a : NetworkTopolopyApp.vertices()) {
 //            iterator("sources " + a.getLabel() + " :", NetworkTopolopyApp.sources(a).keySet());
