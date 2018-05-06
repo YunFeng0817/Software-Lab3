@@ -1,5 +1,6 @@
 package helper;
 
+import edge.Edge;
 import factory.vertex.VertexFactory;
 import graph.Graph;
 import vertex.Vertex;
@@ -54,6 +55,43 @@ class VertexCommand extends Command {
             } else {
                 System.out.println("Not found the specific vertex");
             }
+        }
+    }
+
+    @Override
+    void update(String[] args) {
+        Pattern Rule = Pattern.compile("\"(.*)\"");
+        Matcher matcher = Rule.matcher(args[2]);
+        String label;
+        Vertex vertex;
+        if (matcher.find()) {
+            label = matcher.group(1);
+            vertex = graph.vertices().stream().filter(item -> item.getLabel().equals(label)).findFirst().orElse(null);
+            if (vertex == null)
+                return;
+        } else
+            return;
+        StringBuilder OptionalCommand = new StringBuilder();
+        for (int i = 4; i < args.length; i++) {
+            OptionalCommand.append(args[i]);
+        }
+        Rule = Pattern.compile("label=(.*)");
+        matcher = Rule.matcher(OptionalCommand);
+        String newLabel;
+        if (matcher.find()) {
+            newLabel = matcher.group(1);
+            vertex.setLabel(newLabel);
+            System.out.println("Update label successfully");
+        }
+        Rule = Pattern.compile("argument=(.*)");
+        matcher = Rule.matcher(OptionalCommand);
+        String argument;
+        String[] arguments;
+        if (matcher.find()) {
+            argument = matcher.group(1);
+            arguments = argument.split(",");
+            vertex.fillVertexInfo(arguments);
+            System.out.println("The argument of the vertex update successfully");
         }
     }
 }

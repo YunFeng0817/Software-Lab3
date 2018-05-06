@@ -53,4 +53,9 @@ class HyperEdgeCommand extends Command {
     void delete(String[] args) {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    void update(String[] args) {
+
+    }
 }

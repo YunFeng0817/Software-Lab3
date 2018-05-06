@@ -34,6 +34,8 @@ public class ParseCommandHelper {
                 case "add":
                     cmd.add(args);
                     break;
+                case "update":
+                    cmd.update(args);
                 case "delete":
                     cmd.delete(args);
                     break;

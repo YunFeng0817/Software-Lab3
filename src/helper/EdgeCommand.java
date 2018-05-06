@@ -100,4 +100,39 @@ class EdgeCommand extends Command {
             }
         }
     }
+
+    @Override
+    void update(String[] args) {
+        Pattern Rule = Pattern.compile("\"(.*)\"");
+        Matcher matcher = Rule.matcher(args[2]);
+        String label;
+        Edge edge;
+        if (matcher.find()) {
+            label = matcher.group(1);
+            edge = graph.edges().stream().filter(item -> item.getLabel().equals(label)).findFirst().orElse(null);
+            if (edge == null)
+                return;
+        } else
+            return;
+        Rule = Pattern.compile("weight=([0-9]+/.?[0-9]*)");
+        StringBuilder OptionalCommand = new StringBuilder();
+        for (int i = 4; i < args.length; i++) {
+            OptionalCommand.append(args[i]);
+        }
+        matcher = Rule.matcher(OptionalCommand);
+        double weight;
+        if (matcher.find()) {
+            weight = Double.parseDouble(matcher.group(1));
+            edge.setWeight(weight);
+            System.out.println("Update weight successfully");
+        }
+        Rule = Pattern.compile("label=(.*)");
+        matcher = Rule.matcher(OptionalCommand);
+        String newLabel;
+        if (matcher.find()) {
+            newLabel = matcher.group(1);
+            edge.setLabel(newLabel);
+            System.out.println("Update label successfully");
+        }
+    }
 }

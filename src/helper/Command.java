@@ -15,6 +15,8 @@ abstract class Command {
 
     abstract void delete(String[] args);
 
+    abstract void update(String[] args);
+
     static boolean confirm() {
         System.err.println("Are you sure to delete them? (Yes/no)");
         Scanner scanner = new Scanner(System.in);
