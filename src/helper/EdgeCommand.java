@@ -77,6 +77,21 @@ class EdgeCommand extends Command {
 
     @Override
     void delete(String[] args) {
-
+        Pattern Rule = Pattern.compile("\"(.*)\"");
+        Matcher matcher = Rule.matcher(args[2]);
+        String regex;
+        if (matcher.find()) {
+            regex = matcher.group(1);
+            Pattern InputRule = Pattern.compile(regex);
+            List<Edge> edges = graph.edges().stream().filter(item -> InputRule.matcher(item.getLabel()).find()).collect(Collectors.toList());
+            if (edges.size() != 0) {
+                System.out.println(edges.size() + " vertices are found:");
+                edges.forEach(item -> System.out.println(item.getLabel()));
+                // 请用户确认是否删除这些内容
+                if (Command.confirm()) {
+                    graph.vertices().removeIf(item -> InputRule.matcher(item.getLabel()).find());
+                }
+            }
+        }
     }
 }
