@@ -71,7 +71,10 @@ class EdgeCommand extends Command {
                     filter(item -> item.getLabel().equals(label1) || item.getLabel().equals(label2))
                     .collect(Collectors.toList());
             Edge newEdge = EdgeFactory.createEdge(label, type, vertices, weight);
-            graph.addEdge(newEdge);
+            if (graph.addEdge(newEdge))
+                System.out.println("Add edge successfully");
+            else
+                System.err.println("Add fail!");
         }
     }
 
@@ -85,12 +88,15 @@ class EdgeCommand extends Command {
             Pattern InputRule = Pattern.compile(regex);
             List<Edge> edges = graph.edges().stream().filter(item -> InputRule.matcher(item.getLabel()).find()).collect(Collectors.toList());
             if (edges.size() != 0) {
-                System.out.println(edges.size() + " vertices are found:");
+                System.out.println(edges.size() + " edges are found:");
                 edges.forEach(item -> System.out.println(item.getLabel()));
                 // 请用户确认是否删除这些内容
                 if (Command.confirm()) {
-                    graph.vertices().removeIf(item -> InputRule.matcher(item.getLabel()).find());
+                    edges.forEach(item -> graph.removeEdge(item));
+                    System.out.println("Delete them successfully");
                 }
+            } else {
+                System.out.println("Not found the specific edge");
             }
         }
     }

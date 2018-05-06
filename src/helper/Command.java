@@ -17,8 +17,11 @@ abstract class Command {
 
     static boolean confirm() {
         System.err.println("Are you sure to delete them? (Yes/no)");
-        Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        String input = "";
+        if (scanner.hasNextLine()) {
+            input = scanner.nextLine();
+        }
         return input.equals("y") || input.equals("Y") || input.equals("yes") || input.equals("Yes");
     }
 }

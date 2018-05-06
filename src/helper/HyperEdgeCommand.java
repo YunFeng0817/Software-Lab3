@@ -42,7 +42,10 @@ class HyperEdgeCommand extends Command {
                     .filter(item -> edgesList.contains(item.getLabel()))
                     .collect(Collectors.toList());
             Edge HyperEdge = EdgeFactory.createEdge(label, type, vertices, -1);
-            graph.addEdge(HyperEdge);
+            if(graph.addEdge(HyperEdge))
+                System.out.println("Add hyper edge successfully");
+            else
+                System.err.println("Add fail!");
         }
     }
 

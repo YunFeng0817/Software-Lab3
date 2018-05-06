@@ -27,9 +27,10 @@ class VertexCommand extends Command {
         if (matcher.find()) {
             type = matcher.group(1);
             Vertex newVertex = VertexFactory.createVertex(label, type, null);
-            if (graph.addVertex(newVertex)) {
+            if (graph.addVertex(newVertex))
                 System.out.println("Add vertex successfully!");
-            }
+            else
+                System.err.println("Add fail!");
         }
     }
 
@@ -47,8 +48,11 @@ class VertexCommand extends Command {
                 vertices.forEach(item -> System.out.println(item.getLabel()));
                 // 请用户确认是否删除这些内容
                 if (Command.confirm()) {
-                    graph.vertices().removeIf(item -> InputRule.matcher(item.getLabel()).find());
+                    vertices.forEach(item -> graph.removeVertex(item));
+                    System.out.println("Delete them successfully");
                 }
+            } else {
+                System.out.println("Not found the specific vertex");
             }
         }
     }
