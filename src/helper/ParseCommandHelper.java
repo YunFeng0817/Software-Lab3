@@ -36,6 +36,8 @@ public class ParseCommandHelper {
                     break;
                 case "update":
                     cmd.update(args);
+                case "show":
+                    cmd.show(args);
                 case "delete":
                     cmd.delete(args);
                     break;

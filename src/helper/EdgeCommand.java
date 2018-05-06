@@ -135,4 +135,9 @@ class EdgeCommand extends Command {
             System.out.println("Update label successfully");
         }
     }
+
+    @Override
+    void show(String[] args) {
+        throw new UnsupportedOperationException();
+    }
 }

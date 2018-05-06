@@ -5,6 +5,7 @@ import factory.vertex.VertexFactory;
 import graph.Graph;
 import vertex.Vertex;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.*;
 import java.util.stream.Collectors;
@@ -92,6 +93,56 @@ class VertexCommand extends Command {
             arguments = argument.split(",");
             vertex.fillVertexInfo(arguments);
             System.out.println("The argument of the vertex update successfully");
+        }
+    }
+
+    @Override
+    void show(String[] args) {
+        Pattern Rule = Pattern.compile("\"(.*)\"");
+        Matcher matcher = Rule.matcher(args[2]);
+        String label;
+        Vertex vertex;
+        if (matcher.find()) {
+            label = matcher.group(1);
+            vertex = graph.vertices().stream().filter(item -> item.getLabel().equals(label)).findFirst().orElse(null);
+            if (vertex == null)
+                return;
+        } else
+            return;
+        StringBuilder OptionalCommand = new StringBuilder();
+        for (int i = 4; i < args.length; i++) {
+            OptionalCommand.append(args[i]);
+        }
+        List<Pattern> Rules = new ArrayList<>();
+        Rules.add(Pattern.compile("eccentricity"));
+        Rules.add(Pattern.compile("degree"));
+        Rules.add(Pattern.compile("indegree"));
+        Rules.add(Pattern.compile("outdegree"));
+        Rules.add(Pattern.compile("closenessCentrality"));
+        Rules.add(Pattern.compile("betweennessCentrality"));
+        matcher = Rules.get(0).matcher(OptionalCommand);
+        if (matcher.find()) {
+            System.out.println("The eccentricity of the vertex : " + GraphMetrics.eccentricity(graph, vertex));
+        }
+        matcher = Rules.get(1).matcher(OptionalCommand);
+        if (matcher.find()) {
+            System.out.println("The degree of the vertex : " + GraphMetrics.degreeCentrality(graph, vertex));
+        }
+        matcher = Rules.get(2).matcher(OptionalCommand);
+        if (matcher.find()) {
+            System.out.println("The inDegree of the vertex : " + GraphMetrics.inDegreeCentrality(graph, vertex));
+        }
+        matcher = Rules.get(3).matcher(OptionalCommand);
+        if (matcher.find()) {
+            System.out.println("The outDegree of the vertex : " + GraphMetrics.outDegreeCentrality(graph, vertex));
+        }
+        matcher = Rules.get(4).matcher(OptionalCommand);
+        if (matcher.find()) {
+            System.out.println("The closenessCentrality of the vertex : " + GraphMetrics.closenessCentrality(graph, vertex));
+        }
+        matcher = Rules.get(5).matcher(OptionalCommand);
+        if (matcher.find()) {
+            System.out.println("The betweennessCentrality of the vertex : " + GraphMetrics.betweennessCentrality(graph, vertex));
         }
     }
 }
