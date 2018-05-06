@@ -1,6 +1,7 @@
 package helper;
 
 import graph.Graph;
+import vertex.Vertex;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ class GraphCommand extends Command {
         Rules.add(Pattern.compile("radius"));
         Rules.add(Pattern.compile("diameter"));
         Rules.add(Pattern.compile("visiable"));
+        Rules.add(Pattern.compile("distance=\"(.*)\"\"(.*)\""));
         matcher = Rules.get(0).matcher(OptionalCommand);
         if (matcher.find()) {
             System.out.println("The degreeCentrality of the graph : " + GraphMetrics.degreeCentrality(graph));
@@ -54,6 +56,17 @@ class GraphCommand extends Command {
         matcher = Rules.get(3).matcher(OptionalCommand);
         if (matcher.find()) {
             GraphVisualizationHelper.visualize(graph);
+        }
+        Matcher newMatcher = Rules.get(4).matcher(OptionalCommand);
+        if (matcher.find()) {
+            Vertex start, end;
+            start = graph.vertices().stream().filter(item -> item.getLabel().equals(newMatcher.group(1))).findFirst().orElse(null);
+            end = graph.vertices().stream().filter(item -> item.getLabel().equals(newMatcher.group(2))).findFirst().orElse(null);
+            if (start == null || end == null) {
+                System.err.println("The input vertex is not in the graph ");
+                return;
+            }
+            System.out.println("The distance between the two vertices : " + GraphMetrics.distance(graph, start, end));
         }
     }
 }
