@@ -1,6 +1,5 @@
 package application;
 
-import graph.SocialNetwork;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -24,7 +23,7 @@ public class SocialNetworkAppTest {
 
     @Test
     public void testSocialNetworkApp() throws Exception {
-        SocialNetworkApp socialNetwork = new SocialNetworkApp("./test/graph/data/GraphSocial.txt");
+        SocialNetworkApp socialNetwork = new SocialNetworkApp("test/graph/data/GraphSocial.txt");
     }
 
 } 

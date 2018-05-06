@@ -30,28 +30,28 @@ public class GraphFactoryTest {
     @Test
     public void testCreateGraph() throws Exception {
         // GraphPoet.txt is a data file which contain graph information
-        assertEquals(GraphPoetFactory.createGraph("./test/graph/data/GraphPoet.txt"), GraphFactory.createGraph("./test/graph/data/GraphPoet.txt"));
-        assertEquals(GraphSocialFactory.createGraph("./test/graph/data/GraphSocial.txt"), GraphFactory.createGraph("./test/graph/data/GraphSocial.txt"));
-        assertEquals(GraphTopologyFactory.createGraph("./test/graph/data/GraphTopology.txt"), GraphFactory.createGraph("./test/graph/data/GraphTopology.txt"));
-        assertEquals(GraphMovieFactory.createGraph("./test/graph/data/GraphMovie.txt"), GraphFactory.createGraph("./test/graph/data/GraphMovie.txt"));
+        assertEquals(GraphPoetFactory.createGraph("test/graph/data/GraphPoet.txt"), GraphFactory.createGraph("test/graph/data/GraphPoet.txt"));
+        assertEquals(GraphSocialFactory.createGraph("test/graph/data/GraphSocial.txt"), GraphFactory.createGraph("test/graph/data/GraphSocial.txt"));
+        assertEquals(GraphTopologyFactory.createGraph("test/graph/data/GraphTopology.txt"), GraphFactory.createGraph("test/graph/data/GraphTopology.txt"));
+        assertEquals(GraphMovieFactory.createGraph("test/graph/data/GraphMovie.txt"), GraphFactory.createGraph("test/graph/data/GraphMovie.txt"));
     }
 
     @Test
     public void testGetVertices() throws Exception {
         // GraphPoet.txt is a data file which contain graph information
-        GraphFactory.getVertices("./test/graph/data/GraphPoet.txt");
+        GraphFactory.getVertices("test/graph/data/GraphPoet.txt");
 //        GraphFactory.getVertices("./test/graph/data/GraphSocial.txt");
-        GraphFactory.getVertices("./test/graph/data/GraphTopology.txt");
-        GraphFactory.getVertices("./test/graph/data/GraphMovie.txt");
+        GraphFactory.getVertices("test/graph/data/GraphTopology.txt");
+        GraphFactory.getVertices("test/graph/data/GraphMovie.txt");
     }
 
     @Test
     public void testGetEdges() throws Exception {
         // GraphPoet.txt is a data file which contain graph information
-        GraphFactory.getEdges("./test/graph/data/GraphPoet.txt");
-        GraphFactory.getVertices("./test/graph/data/GraphSocial.txt");
-        GraphFactory.getEdges("./test/graph/data/GraphTopology.txt");
-        GraphFactory.getEdges("./test/graph/data/GraphMovie.txt");
+        GraphFactory.getEdges("test/graph/data/GraphPoet.txt");
+        GraphFactory.getVertices("test/graph/data/GraphSocial.txt");
+        GraphFactory.getEdges("test/graph/data/GraphTopology.txt");
+        GraphFactory.getEdges("test/graph/data/GraphMovie.txt");
     }
 
 } 

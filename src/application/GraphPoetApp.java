@@ -1,12 +1,7 @@
 package application;
 
-import edge.Edge;
-import factory.edge.EdgeFactory;
 import factory.graph.GraphFactory;
-import factory.graph.GraphPoetFactory;
-import factory.vertex.VertexFactory;
 import graph.*;
-import helper.GraphVisualizationHelper;
 import helper.ParseCommandHelper;
 import vertex.Vertex;
 
@@ -17,7 +12,7 @@ class GraphPoetApp {
     private Graph graphPoet;
 
     public static void main(String[] args) throws IOException {
-        new GraphPoetApp("./test/graph/data/GraphPoet.txt");
+        new GraphPoetApp("test/graph/data/GraphPoet.txt");
     }
 
     GraphPoetApp(String filePath) throws IOException {

@@ -1,8 +1,5 @@
 package application;
 
-import factory.graph.GraphMovieFactory;
-import graph.Graph;
-import graph.MovieGraph;
 import helper.ParseCommandHelper;
 
 import java.io.IOException;
@@ -10,7 +7,7 @@ import java.io.IOException;
 class MovieGraphApp {
 
     public static void main(String[] args) throws IOException {
-        new MovieGraphApp("./test/graph/data/GraphMovie.txt");
+        new MovieGraphApp("test/graph/data/GraphMovie.txt");
     }
 
     MovieGraphApp(String filePath) throws IOException {

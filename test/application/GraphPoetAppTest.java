@@ -1,11 +1,9 @@
 package application;
 
-import graph.Graph;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -24,7 +22,7 @@ public class GraphPoetAppTest {
 
     @Before
     public void before() throws Exception {
-        poetApp = new GraphPoetApp("./test/graph/data/GraphPoet.txt");
+        poetApp = new GraphPoetApp("test/graph/data/GraphPoet.txt");
     }
 
     @After

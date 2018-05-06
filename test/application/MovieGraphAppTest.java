@@ -1,6 +1,5 @@
 package application;
 
-import graph.SocialNetwork;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -24,7 +23,7 @@ public class MovieGraphAppTest {
 
     @Test
     public void testMovieGraphApp() throws Exception {
-        MovieGraphApp movie = new MovieGraphApp("./test/graph/data/GraphMovie.txt");
+        MovieGraphApp movie = new MovieGraphApp("test/graph/data/GraphMovie.txt");
     }
 
 }

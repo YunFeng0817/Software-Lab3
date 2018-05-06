@@ -47,10 +47,10 @@ public class GraphVisualizationHelper {
 
     public static void main(String[] args) throws IOException {
         Graph poet, socialNetwork, topologyNetwork, movie;
-        poet = GraphFactory.createGraph("./test/graph/data/GraphPoet.txt");
-        socialNetwork = GraphFactory.createGraph("./test/graph/data/GraphSocial.txt");
-        topologyNetwork = GraphFactory.createGraph("./test/graph/data/GraphTopology.txt");
-        movie = GraphFactory.createGraph("./test/graph/data/GraphMovie.txt");
+        poet = GraphFactory.createGraph("test/graph/data/GraphPoet.txt");
+        socialNetwork = GraphFactory.createGraph("test/graph/data/GraphSocial.txt");
+        topologyNetwork = GraphFactory.createGraph("test/graph/data/GraphTopology.txt");
+        movie = GraphFactory.createGraph("test/graph/data/GraphMovie.txt");
         GraphVisualizationHelper.visualize(poet);
         GraphVisualizationHelper.visualize(socialNetwork);
         GraphVisualizationHelper.visualize(topologyNetwork);

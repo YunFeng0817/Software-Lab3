@@ -28,10 +28,10 @@ public class GraphMetricsTest {
 
     @Before
     public void before() throws Exception {
-        poet = GraphFactory.createGraph("./test/graph/data/GraphPoet.txt");
-        socialNetwork = GraphFactory.createGraph("./test/graph/data/GraphSocial.txt");
-        topologyNetwork = GraphFactory.createGraph("./test/graph/data/GraphTopology.txt");
-        movie = GraphFactory.createGraph("./test/graph/data/GraphMovie.txt");
+        poet = GraphFactory.createGraph("test/graph/data/GraphPoet.txt");
+        socialNetwork = GraphFactory.createGraph("test/graph/data/GraphSocial.txt");
+        topologyNetwork = GraphFactory.createGraph("test/graph/data/GraphTopology.txt");
+        movie = GraphFactory.createGraph("test/graph/data/GraphMovie.txt");
     }
 
     @After

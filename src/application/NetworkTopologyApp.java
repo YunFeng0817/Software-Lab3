@@ -11,7 +11,7 @@ class NetworkTopologyApp {
     private Graph NetworkTopolopyApp;
 
     public static void main(String[] args) throws IOException {
-        new NetworkTopologyApp("./test/graph/data/GraphTopology.txt");
+        new NetworkTopologyApp("test/graph/data/GraphTopology.txt");
     }
 
     NetworkTopologyApp(String filePath) throws IOException {
