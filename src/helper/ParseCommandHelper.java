@@ -62,6 +62,10 @@ public class ParseCommandHelper {
                 HyperEdgeCommand hyperEdgeCommand = new HyperEdgeCommand(graph);
                 command(args, hyperEdgeCommand);
                 break;
+            case "graph":
+                GraphCommand graphCommand = new GraphCommand(graph);
+                command(args, graphCommand);
+                break;
             default:
                 throw new UnsupportedOperationException("usage");
         }

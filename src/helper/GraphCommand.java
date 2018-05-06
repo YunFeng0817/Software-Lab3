@@ -1,14 +1,13 @@
 package helper;
 
 import graph.Graph;
-import vertex.Vertex;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class GraphCommand extends Command {
+class GraphCommand extends Command {
     GraphCommand(Graph g) {
         super(g);
     }
