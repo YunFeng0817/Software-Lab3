@@ -7,6 +7,44 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.*;
 
+/**
+ * 点的命令
+ * <p>vertex --add label type  向图中添加名为label，类型为type的点</p>
+ * <p>vertex --delete regex 删除所有label符合regex规则的点</p>
+ * <p>vertex --update label</p>
+ * <ul>
+ * <li>label=    改变点的label值</li>
+ * <li>argument=   改变点的argument值，即点的属性</li>
+ * </ul>
+ * <p>vertex --show</p>
+ * <ul>
+ * <li>eccentricity 求点的eccentricity值</li>
+ * <li>degree 求点的degree值</li>
+ * <li>indegree 求点的indegree值</li>
+ * <li>求点的outdegree值</li>
+ * <li>closenessCentrality 求点的closenessCentrality值</li>
+ * <li>betweennessCentrality 求点的 betweennessCentrality值</li>
+ * </ul>
+ * <p>边的命令</p>
+ * <p>edge --add label type [weighted=Y|N] [weight] [directed=Y|N] v1, v2</p>
+ * <p>edge --delete regex 删除所有label符合regex的边</p>
+ * <p>超边的命令</p>
+ * <p>hyperedge --add</p>
+ * <ul>
+ * <li>label type vertex1,    ..., vertexn 向图中添加一个新的超边</li>
+ * <li>label vertex1,    ..., vertexn 向label 为 label的超边添加点</li>
+ * </ul>
+ * <p>hyperedge --delete label regex 删除超边中label符合regex规则的点</p>
+ * <p>图的命令</p>
+ * <p>graph --show</p>
+ * <ul>
+ * <li>degreeCentrality 输出图的degreeCentrality值</li>
+ * <li>radius 输出图的radius值</li>
+ * <li>diameter 输出图的diameter值</li>
+ * <li>visiable 将图的可视化结果输出</li>
+ * <li>distance="vertex1""vertex2" 输出vertex1 与 vertex2 在图中的 distance值</li>
+ * </ul>
+ */
 public class ParseCommandHelper {
     /**
      * 用于图应用的命令行交互
