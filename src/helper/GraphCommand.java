@@ -32,14 +32,14 @@ class GraphCommand extends Command {
     void show(String[] args) {
         Matcher matcher;
         StringBuilder OptionalCommand = new StringBuilder();
-        for (int i = 4; i < args.length; i++) {
+        for (int i = 2; i < args.length; i++) {
             OptionalCommand.append(args[i]);
         }
         List<Pattern> Rules = new ArrayList<>();
         Rules.add(Pattern.compile("degreeCentrality"));
         Rules.add(Pattern.compile("radius"));
         Rules.add(Pattern.compile("diameter"));
-        Rules.add(Pattern.compile("visiable"));
+        Rules.add(Pattern.compile("visible"));
         Rules.add(Pattern.compile("distance=\"(.*)\"\"(.*)\""));
         matcher = Rules.get(0).matcher(OptionalCommand);
         if (matcher.find()) {

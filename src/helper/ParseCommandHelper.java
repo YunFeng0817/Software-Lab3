@@ -31,8 +31,8 @@ import java.util.regex.*;
  * <p>超边的命令</p>
  * <p>hyperedge --add</p>
  * <ul>
- * <li>label type vertex1,    ..., vertexn 向图中添加一个新的超边</li>
- * <li>label vertex1,    ..., vertexn 向label 为 label的超边添加点</li>
+ * <li>label type vertex(1),    ..., vertex(n) 向图中添加一个新的超边</li>
+ * <li>label vertex(1),    ..., vertex(n) 向label 为 label的超边添加点</li>
  * </ul>
  * <p>hyperedge --delete label regex 删除超边中label符合regex规则的点</p>
  * <p>图的命令</p>
@@ -41,7 +41,7 @@ import java.util.regex.*;
  * <li>degreeCentrality 输出图的degreeCentrality值</li>
  * <li>radius 输出图的radius值</li>
  * <li>diameter 输出图的diameter值</li>
- * <li>visiable 将图的可视化结果输出</li>
+ * <li>visible 将图的可视化结果输出</li>
  * <li>distance="vertex1""vertex2" 输出vertex1 与 vertex2 在图中的 distance值</li>
  * </ul>
  */
@@ -80,8 +80,10 @@ public class ParseCommandHelper {
                     break;
                 case "update":
                     cmd.update(args);
+                    break;
                 case "show":
                     cmd.show(args);
+                    break;
                 case "delete":
                     cmd.delete(args);
                     break;
