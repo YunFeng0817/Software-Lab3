@@ -11,9 +11,9 @@ import java.util.*;
 class GraphPoetApp {
     private Graph graphPoet;
 
-//    public static void main(String[] args) throws IOException {
-//        new GraphPoetApp("test/graph/data/GraphPoet.txt");
-//    }
+    public static void main(String[] args) throws IOException {
+        new GraphPoetApp("test/graph/data/GraphPoet.txt");
+    }
 
     GraphPoetApp(String filePath) throws IOException {
         graphPoet = GraphFactory.createGraph(filePath);
