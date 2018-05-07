@@ -10,9 +10,9 @@ import java.util.Collection;
 class NetworkTopologyApp {
     private Graph NetworkTopolopyApp;
 
-    public static void main(String[] args) throws IOException {
-        new NetworkTopologyApp("test/graph/data/GraphTopology.txt");
-    }
+//    public static void main(String[] args) throws IOException {
+//        new NetworkTopologyApp("test/graph/data/GraphTopology.txt");
+//    }
 
     NetworkTopologyApp(String filePath) throws IOException {
         NetworkTopolopyApp = GraphTopologyFactory.createGraph(filePath);
