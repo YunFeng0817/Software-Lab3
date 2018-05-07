@@ -19,19 +19,19 @@ class HyperEdgeCommand extends Command {
     }
 
     @Override
-    void add(String[] args) {
+    void add(List<String> args) {
         Pattern Rule = Pattern.compile("\"(.*)\"");
-        Matcher matcher = Rule.matcher(args[2]);
+        Matcher matcher = Rule.matcher(args.get(0));
         String label;
         if (matcher.find())
             label = matcher.group(1);
         else
             return;
         String type;
-        matcher = Rule.matcher(args[3]);
+        matcher = Rule.matcher(args.get(1));
         StringBuilder OptionalCommand = new StringBuilder("");
-        for (int i = 4; i < args.length; i++) {
-            OptionalCommand.append(args[i]);
+        for (int i = 4; i < args.size(); i++) {
+            OptionalCommand.append(args.get(i));
         }
         String[] edgesLabels = OptionalCommand.toString().split("\"");
         List<String> edgesList = new ArrayList<>(Arrays.asList(edgesLabels));
@@ -61,9 +61,9 @@ class HyperEdgeCommand extends Command {
     }
 
     @Override
-    void delete(String[] args) {
+    void delete(List<String> args) {
         Pattern Rule = Pattern.compile("\"(.*)\"");
-        Matcher matcher = Rule.matcher(args[2]);
+        Matcher matcher = Rule.matcher(args.get(0));
         String label;
         Edge hyperEdge;
         if (matcher.find()) {
@@ -73,7 +73,7 @@ class HyperEdgeCommand extends Command {
                 System.err.println("Can't find the hyper edge!");
                 return;
             }
-            matcher = Rule.matcher(args[3]);
+            matcher = Rule.matcher(args.get(1));
             String regex;
             if (matcher.find()) {
                 regex = matcher.group(1);
@@ -103,12 +103,12 @@ class HyperEdgeCommand extends Command {
     }
 
     @Override
-    void update(String[] args) {
+    void update(List<String> args) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    void show(String[] args) {
+    void show(List<String> args) {
         throw new UnsupportedOperationException();
     }
 }

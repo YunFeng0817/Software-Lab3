@@ -14,26 +14,26 @@ class GraphCommand extends Command {
     }
 
     @Override
-    void add(String[] args) {
+    void add(List<String> args) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    void delete(String[] args) {
+    void delete(List<String> args) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    void update(String[] args) {
+    void update(List<String> args) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    void show(String[] args) {
+    void show(List<String> args) {
         Matcher matcher;
         StringBuilder OptionalCommand = new StringBuilder();
-        for (int i = 2; i < args.length; i++) {
-            OptionalCommand.append(args[i]);
+        for (String arg : args) {
+            OptionalCommand.append(arg);
         }
         List<Pattern> Rules = new ArrayList<>();
         Rules.add(Pattern.compile("degreeCentrality"));

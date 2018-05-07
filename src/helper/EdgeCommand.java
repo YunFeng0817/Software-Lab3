@@ -16,21 +16,21 @@ class EdgeCommand extends Command {
     }
 
     @Override
-    void add(String[] args) {
+    void add(List<String> args) {
         Pattern Rule = Pattern.compile("\"(.*)\"");
-        Matcher matcher = Rule.matcher(args[2]);
+        Matcher matcher = Rule.matcher(args.get(0));
         String label;
         if (matcher.find())
             label = matcher.group(1);
         else
             return;
         String type;
-        matcher = Rule.matcher(args[3]);
+        matcher = Rule.matcher(args.get(1));
         if (matcher.find()) {
             type = matcher.group(1);
             StringBuilder OptionalCommand = new StringBuilder();
-            for (int i = 4; i < args.length; i++) {
-                OptionalCommand.append(args[i]);
+            for (int i = 2; i < args.size(); i++) {
+                OptionalCommand.append(args.get(i));
             }
             Rule = Pattern.compile("\"(.*)\"\"(.*)\"");
             matcher = Rule.matcher(OptionalCommand);
@@ -79,9 +79,9 @@ class EdgeCommand extends Command {
     }
 
     @Override
-    void delete(String[] args) {
+    void delete(List<String> args) {
         Pattern Rule = Pattern.compile("\"(.*)\"");
-        Matcher matcher = Rule.matcher(args[2]);
+        Matcher matcher = Rule.matcher(args.get(0));
         String regex;
         if (matcher.find()) {
             regex = matcher.group(1);
@@ -102,9 +102,9 @@ class EdgeCommand extends Command {
     }
 
     @Override
-    void update(String[] args) {
+    void update(List<String> args) {
         Pattern Rule = Pattern.compile("\"(.*)\"");
-        Matcher matcher = Rule.matcher(args[2]);
+        Matcher matcher = Rule.matcher(args.get(0));
         String label;
         Edge edge;
         if (matcher.find()) {
@@ -116,8 +116,8 @@ class EdgeCommand extends Command {
             return;
         Rule = Pattern.compile("weight=([0-9]+/.?[0-9]*)");
         StringBuilder OptionalCommand = new StringBuilder();
-        for (int i = 4; i < args.length; i++) {
-            OptionalCommand.append(args[i]);
+        for (int i = 1; i < args.size(); i++) {
+            OptionalCommand.append(args.get(i));
         }
         matcher = Rule.matcher(OptionalCommand);
         double weight;
@@ -137,7 +137,7 @@ class EdgeCommand extends Command {
     }
 
     @Override
-    void show(String[] args) {
+    void show(List<String> args) {
         throw new UnsupportedOperationException();
     }
 }

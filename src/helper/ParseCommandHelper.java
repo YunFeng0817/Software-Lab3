@@ -4,7 +4,7 @@ import factory.graph.GraphFactory;
 import graph.Graph;
 
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.*;
 
 /**
@@ -54,13 +54,13 @@ public class ParseCommandHelper {
      */
     public static void Command(String filePath) throws IOException {
         Graph graph = GraphFactory.createGraph(filePath);
-        String[] params;
+        List<String> params;
         while (true) {
             System.out.print("Graph>>>");
             Scanner in = new Scanner(System.in);
             if (in.hasNextLine()) {
                 String input = in.nextLine();
-                params = input.split(" ");
+                params = new LinkedList<>(Arrays.asList(input.split(" ")));
                 if (input.equals("exit"))
                     System.exit(0);
                 type(params, graph);
@@ -68,10 +68,11 @@ public class ParseCommandHelper {
         }
     }
 
-    private static void command(String[] args, Command cmd) {
+    private static void command(List<String> args, Command cmd) {
         Pattern commandRule = Pattern.compile("--(.*)");
-        Matcher matcher = commandRule.matcher(args[1]);
+        Matcher matcher = commandRule.matcher(args.get(0));
         String command;
+        args.remove(0);
         if (matcher.find()) {
             command = matcher.group(1);
             switch (command) {
@@ -92,10 +93,12 @@ public class ParseCommandHelper {
         }
     }
 
-    private static void type(String[] args, Graph graph) {
-        if (args.length < 3)
+    private static void type(List<String> args, Graph graph) {
+        if (args.size() < 3)
             return;
-        switch (args[0]) {
+        String type = args.get(0);
+        args.remove(0);
+        switch (type) {
             case "vertex":
                 VertexCommand vertexCommand = new VertexCommand(graph);
                 command(args, vertexCommand);
